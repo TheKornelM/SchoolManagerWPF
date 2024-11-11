@@ -11,7 +11,7 @@ namespace SchoolManagerWPF.View
         public AdminUI(Admin admin)
         {
             InitializeComponent();
-            MessageBox.Show(admin.User.Username);
+            Style = (Style)FindResource(typeof(Window));
         }
     }
 }

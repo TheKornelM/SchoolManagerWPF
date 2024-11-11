@@ -11,7 +11,7 @@ namespace SchoolManagerWPF.View
         public TeacherUI(Teacher teacher)
         {
             InitializeComponent();
-            MessageBox.Show(teacher.User.Username);
+            Style = (Style)FindResource(typeof(Window));
 
         }
     }

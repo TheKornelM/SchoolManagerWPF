@@ -4,9 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SchoolManagerWPF.View"
+        xmlns:resx="clr-namespace:SchoolManagerWPF.Resources"  
         mc:Ignorable="d"
         Title="AdminUI" Height="450" Width="800">
     <Grid>
-        
+        <TabControl>
+            <TabItem Header="{x:Static resx:UI.Users}">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="54*"/>
+                        <ColumnDefinition Width="343*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="{x:Static resx:UI.Classes}">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="{x:Static resx:UI.AddSubject}"></TabItem>
+            <TabItem Header="{x:Static resx:UI.Roster}"></TabItem>
+        </TabControl>
+
     </Grid>
 </Window>
