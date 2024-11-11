@@ -19,6 +19,6 @@
          Margin="0,295,0,0" 
          VerticalAlignment="Top" 
          Height="120" 
-         Width="304" Click="Button_Click" Name="continueButton" Command="{Binding ShowLoginCommand}"/>
+         Width="304" Name="continueButton" Command="{Binding ShowLoginCommand}"/>
     </Grid>
 </Window>

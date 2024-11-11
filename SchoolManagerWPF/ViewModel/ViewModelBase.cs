@@ -20,7 +20,7 @@ internal class ViewModelBase : INotifyPropertyChanged
         if (EqualityComparer<T>.Default.Equals(field, value))
         {
             return false;
-        };
+        }
 
         field = value;
         OnPropertyChanged(propertyName);

@@ -1,4 +1,6 @@
-﻿using SchoolManagerWPF.ViewModel.Commands;
+﻿using SchoolManagerModel.Entities.UserModel;
+using SchoolManagerWPF.ViewModel.Commands;
+using System.Windows.Input;
 
 namespace SchoolManagerWPF.ViewModel;
 
@@ -21,10 +23,12 @@ internal class LoginViewModel : ViewModelBase
             SetField(ref _password, value, "Password");
         }
     }
-    // public event PropertyChangedEventHandler? PropertyChanged;
-    public LoginUserCommand LoginUserCommand { get; set; }
-    public Action? SuccessfulLogin;
-    public Action? FailedLogin;
+    public ICommand LoginUserCommand { get; set; }
+    public Action<string>? FailedLogin;
+    public Action<Student>? ShowStudentInterface;
+    public Action<Teacher>? ShowTeacherInterface;
+    public Action<Admin>? ShowAdminInterface;
+
     #endregion
 
     #region Private fields
