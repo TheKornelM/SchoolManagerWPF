@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using SchoolManagerModel.Persistence;
+using System.Windows;
 
 namespace SchoolManagerWPF
 {
@@ -7,7 +8,11 @@ namespace SchoolManagerWPF
     /// </summary>
     public partial class App : Application
     {
-
+        public App()
+        {
+            var dbContext = new SchoolDbContext();
+            dbContext.Database.EnsureCreated();
+        }
     }
 
 }

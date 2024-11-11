@@ -170,7 +170,6 @@
   </data>
   <data name="LastName" xml:space="preserve">
     <value>Last name</value>
-    <comment>Vezetéknév</comment>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>Unexpected error happened</value>
