@@ -1,4 +1,5 @@
 ﻿using SchoolManagerModel.Entities.UserModel;
+using SchoolManagerWPF.ViewModel;
 using System.Windows;
 
 namespace SchoolManagerWPF.View
@@ -12,6 +13,10 @@ namespace SchoolManagerWPF.View
         {
             InitializeComponent();
             Style = (Style)FindResource(typeof(Window));
+
+            // View models
+            var vm = new AddUserViewModel();
+            Users.DataContext = vm;
         }
     }
 }

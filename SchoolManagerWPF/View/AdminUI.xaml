@@ -9,12 +9,14 @@
         Title="AdminUI" Height="450" Width="800">
     <Grid>
         <TabControl>
-            <TabItem Header="{x:Static resx:UI.Users}">
-                <Grid Background="#FFE5E5E5">
+            <TabItem Header="{x:Static resx:UI.Users}" >
+                <Grid Background="#FFE5E5E5" Margin="-1,0,1,0" Name="Users">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="54*"/>
-                        <ColumnDefinition Width="343*"/>
                     </Grid.ColumnDefinitions>
+                    <Label Content="{x:Static resx:UI.Username}" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.514,-0.02" Margin="10,0,0,0"/>
+                    <TextBox HorizontalAlignment="Left" Margin="10,37,0,0" TextWrapping="Wrap" Text="{Binding Username}" VerticalAlignment="Top" Width="206" RenderTransformOrigin="1.477,2.339"/>
+                    <Label Content="{Binding UsernameValidatorErrors}" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Foreground="Red" FontWeight="Bold"/>
                 </Grid>
 
             </TabItem>
