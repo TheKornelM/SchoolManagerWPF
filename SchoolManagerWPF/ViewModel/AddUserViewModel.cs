@@ -13,14 +13,26 @@ internal class AddUserViewModel : ViewModelBase
         get { return _username; }
         set
         {
-            SetField(ref _username, value, "Username");
-            var resourceManager = new ResourceManager("SchoolManagerWF.Resources.UI",
+            SetField(ref _username, value, nameof(Username));
+
+            var resourceManager = new ResourceManager("SchoolManagerWPF.Resources.UI",
                 Assembly.GetExecutingAssembly());
-            var validationResult = new UsernameValidator(resourceManager).Validate(Username);
-            UsernameValidatorErrors = string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
-            MessageBox.Show("nok");
+            var validator = new UsernameValidator(resourceManager);
+            var validationResult = validator.Validate(_username);
+
+            // Update UsernameValidatorErrors based on validation result
+            if (!validationResult.IsValid)
+            {
+                UsernameValidatorErrors = string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
+                MessageBox.Show("NOK");
+            }
+            else
+            {
+                UsernameValidatorErrors = string.Empty; // Clear errors if valid
+            }
         }
     }
+
     public string Password
     {
         get { return _password; }
@@ -35,7 +47,7 @@ internal class AddUserViewModel : ViewModelBase
         get { return _usernameValidatorErrors; }
         set
         {
-            SetField(ref _username, value, "Username");
+            SetField(ref _usernameValidatorErrors, value, "UsernameValidatorErrors");
         }
     }
 
