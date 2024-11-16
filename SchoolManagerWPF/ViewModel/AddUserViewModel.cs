@@ -1,6 +1,5 @@
 ﻿using SchoolManagerModel.Utils;
 using SchoolManagerModel.Validators;
-using System.Diagnostics;
 using System.Resources;
 
 namespace SchoolManagerWPF.ViewModel;
@@ -30,8 +29,9 @@ internal class AddUserViewModel : ViewModelBase
         set
         {
             SetField(ref _password, value, nameof(Password));
-            Debug.WriteLine(_password);
-            ValidatePassword();
+
+            var passwordValidator = new PasswordValidator(_resourceManager).Validate(_password);
+            PasswordValidatorErrors = ValidationErrors.GetErrorsFormatted(passwordValidator);
         }
     }
 
@@ -41,8 +41,8 @@ internal class AddUserViewModel : ViewModelBase
         set
         {
             SetField(ref _confirmPassword, value, nameof(ConfirmPassword));
-            Debug.WriteLine(_confirmPassword);
-            ValidatePassword();
+            var confirmPasswordValidator = new ConfirmPasswordValidator(_resourceManager).Validate((_password, _confirmPassword));
+            ConfirmPasswordValidatorErrors = ValidationErrors.GetErrorsFormatted(confirmPasswordValidator);
         }
     }
 
@@ -146,17 +146,4 @@ internal class AddUserViewModel : ViewModelBase
     }
     #endregion
 
-    #region Private Methods
-
-    private void ValidatePassword()
-    {
-        var passwordValidator = new PasswordValidator(_resourceManager).Validate(_password);
-        PasswordValidatorErrors = ValidationErrors.GetErrorsFormatted(passwordValidator);
-
-        var confirmPasswordValidator = new ConfirmPasswordValidator(_resourceManager).Validate((_password, _confirmPassword));
-        ConfirmPasswordValidatorErrors = ValidationErrors.GetErrorsFormatted(confirmPasswordValidator);
-
-    }
-
-    #endregion
 }
