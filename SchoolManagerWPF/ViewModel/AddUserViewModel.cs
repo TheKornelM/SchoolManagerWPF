@@ -1,4 +1,5 @@
-﻿using SchoolManagerModel.Validators;
+﻿using SchoolManagerModel.Utils;
+using SchoolManagerModel.Validators;
 using System.Resources;
 
 namespace SchoolManagerWPF.ViewModel;
@@ -6,54 +7,152 @@ namespace SchoolManagerWPF.ViewModel;
 internal class AddUserViewModel : ViewModelBase
 {
     private readonly ResourceManager _resourceManager;
-    #region Public fields
+
+    #region Public Properties
     public string Username
     {
-        get { return _username; }
+        get => _username;
         set
         {
             SetField(ref _username, value, nameof(Username));
 
             var validator = new UsernameValidator(_resourceManager);
-            var validationResult = validator.Validate(_username);
 
             // Update UsernameValidatorErrors based on validation result
-            UsernameValidatorErrors = string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
+            UsernameValidatorErrors = ValidationErrors.GetErrorsFormatted(validator.Validate(_username));
         }
     }
 
     public string Password
     {
-        get { return _password; }
+        get => _password;
         set
         {
-            SetField(ref _password, value, "Password");
+            SetField(ref _password, value, nameof(Password));
+            ValidatePassword();
         }
+    }
+
+    public string ConfirmPassword
+    {
+        get => _confirmPassword;
+        set
+        {
+            SetField(ref _confirmPassword, value, nameof(ConfirmPassword));
+            ValidatePassword();
+        }
+    }
+
+    public string Email
+    {
+        get => _email;
+        set
+        {
+            SetField(ref _email, value, nameof(Email));
+            var validator = new EmailValidator(_resourceManager);
+            EmailValidatorErrors = ValidationErrors.GetErrorsFormatted(validator.Validate(_email));
+        }
+    }
+
+    public string FirstName
+    {
+        get => _firstName;
+        set
+        {
+            SetField(ref _firstName, value, nameof(FirstName));
+            var validator = new NotEmptyValidator(_resourceManager);
+            FirstNameValidatorErrors = ValidationErrors.GetErrorsFormatted(validator.Validate(_firstName));
+        }
+    }
+
+    public string LastName
+    {
+        get => _lastName;
+        set
+        {
+            SetField(ref _lastName, value, nameof(LastName));
+            var validator = new NotEmptyValidator(_resourceManager);
+            LastNameValidatorErrors = ValidationErrors.GetErrorsFormatted(validator.Validate(_lastName));
+        }
+    }
+
+    public int SelectedRole
+    {
+        get => _selectedRole;
+        set => SetField(ref _selectedRole, value, nameof(SelectedRole));
     }
 
     public string UsernameValidatorErrors
     {
-        get { return _usernameValidatorErrors; }
-        set
-        {
-            SetField(ref _usernameValidatorErrors, value, "UsernameValidatorErrors");
-        }
+        get => _usernameValidatorErrors;
+        set => SetField(ref _usernameValidatorErrors, value, nameof(UsernameValidatorErrors));
+    }
+
+    public string EmailValidatorErrors
+    {
+        get => _emailValidatorErrors;
+        set => SetField(ref _emailValidatorErrors, value, nameof(EmailValidatorErrors));
+    }
+
+    public string PasswordValidatorErrors
+    {
+        get => _passwordValidatorErrors;
+        set => SetField(ref _passwordValidatorErrors, value, nameof(PasswordValidatorErrors));
+    }
+
+    public string FirstNameValidatorErrors
+    {
+        get => _firstNameValidatorErrors;
+        set => SetField(ref _firstNameValidatorErrors, value, nameof(FirstNameValidatorErrors));
+    }
+
+    public string LastNameValidatorErrors
+    {
+        get => _lastNameValidatorErrors;
+        set => SetField(ref _lastNameValidatorErrors, value, nameof(LastNameValidatorErrors));
     }
 
     #endregion
 
-    #region Private fields
-    private string _username = String.Empty;
-    private string _password = String.Empty;
-    private string _usernameValidatorErrors = String.Empty;
+    #region Private Fields
+    private string _username = string.Empty;
+    private string _password = string.Empty;
+    private string _confirmPassword = string.Empty;
+    private string _email = string.Empty;
+    private string _firstName = string.Empty;
+    private string _lastName = string.Empty;
+    private int _selectedRole;
 
-    //private SecureString _password = new NetworkCredential("", String.Empty).SecurePassword;
+    private string _usernameValidatorErrors = string.Empty;
+    private string _emailValidatorErrors = string.Empty;
+    private string _passwordValidatorErrors = string.Empty;
+    private string _firstNameValidatorErrors;
+    private string _lastNameValidatorErrors;
     #endregion
 
     #region Constructors
     public AddUserViewModel(ResourceManager resourceManager)
     {
         _resourceManager = resourceManager;
+    }
+    #endregion
+
+    #region Private Methods
+
+    private void ValidatePassword()
+    {
+        if (_password != _confirmPassword)
+        {
+            PasswordValidatorErrors = _resourceManager.GetString("NotMatchPasswordConfirm");
+        }
+        else if (_password.Length < 8)
+        {
+            PasswordValidatorErrors = _resourceManager.GetString("MustHaveAtLeast8Characters");
+        }
+        else
+        {
+            PasswordValidatorErrors = string.Empty;
+        }
     }
 
     #endregion
