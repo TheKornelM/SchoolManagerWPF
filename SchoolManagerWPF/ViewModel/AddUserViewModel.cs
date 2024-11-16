@@ -1,12 +1,11 @@
 ﻿using SchoolManagerModel.Validators;
-using System.Reflection;
 using System.Resources;
-using System.Windows;
 
 namespace SchoolManagerWPF.ViewModel;
 
 internal class AddUserViewModel : ViewModelBase
 {
+    private readonly ResourceManager _resourceManager;
     #region Public fields
     public string Username
     {
@@ -15,21 +14,11 @@ internal class AddUserViewModel : ViewModelBase
         {
             SetField(ref _username, value, nameof(Username));
 
-            var resourceManager = new ResourceManager("SchoolManagerWPF.Resources.UI",
-                Assembly.GetExecutingAssembly());
-            var validator = new UsernameValidator(resourceManager);
+            var validator = new UsernameValidator(_resourceManager);
             var validationResult = validator.Validate(_username);
 
             // Update UsernameValidatorErrors based on validation result
-            if (!validationResult.IsValid)
-            {
-                UsernameValidatorErrors = string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
-                MessageBox.Show("NOK");
-            }
-            else
-            {
-                UsernameValidatorErrors = string.Empty; // Clear errors if valid
-            }
+            UsernameValidatorErrors = string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
         }
     }
 
@@ -57,6 +46,15 @@ internal class AddUserViewModel : ViewModelBase
     private string _username = String.Empty;
     private string _password = String.Empty;
     private string _usernameValidatorErrors = String.Empty;
+
     //private SecureString _password = new NetworkCredential("", String.Empty).SecurePassword;
+    #endregion
+
+    #region Constructors
+    public AddUserViewModel(ResourceManager resourceManager)
+    {
+        _resourceManager = resourceManager;
+    }
+
     #endregion
 }

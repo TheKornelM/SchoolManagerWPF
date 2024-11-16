@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SchoolManagerWPF.View"
-        xmlns:resx="clr-namespace:SchoolManagerWPF.Resources"  
+        xmlns:resx="clr-namespace:SchoolManagerWPF.Resources"
+        xmlns:controls="clr-namespace:SchoolManagerWPF.View.Controls"
         mc:Ignorable="d"
         Title="AdminUI" Height="450" Width="800">
     <Grid>
@@ -21,13 +22,9 @@
                             <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Label Content="{x:Static resx:UI.Username}" HorizontalAlignment="Stretch" VerticalAlignment="Top" RenderTransformOrigin="0.514,-0.02" Margin="10,0,0,0" Grid.Column="0" Grid.Row="0" Width="auto" Height="auto"/>
-                        <TextBox Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" RenderTransformOrigin="1.477,2.339" Grid.Row="1" Grid.Column="0"/>
-                        <!--<Label Content="{Binding UsernameValidatorErrors}" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Foreground="Red" FontWeight="Bold" Height="114" Width="470"/>-->
-                        <Label Margin="5,5,5,0" VerticalAlignment="Top"  FontWeight="Bold" Height="auto" Width="auto" Grid.Row="2" Grid.Column="0">
-                            <TextBox TextWrapping="Wrap" Text="{Binding UsernameValidatorErrors}" HorizontalAlignment="Stretch" Width="auto" Grid.Row="2" Grid.Column="0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Red"></TextBox>
-                        </Label>
+                        <controls:ValidatedField LabelContent="Username" FieldValue="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ValidationError="{Binding UsernameValidatorErrors}" Grid.Row="0"/>
                     </Grid>
                 </ScrollViewer>
             </TabItem>
