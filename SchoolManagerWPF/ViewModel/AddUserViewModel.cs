@@ -1,5 +1,6 @@
 ﻿using SchoolManagerModel.Utils;
 using SchoolManagerModel.Validators;
+using System.Diagnostics;
 using System.Resources;
 
 namespace SchoolManagerWPF.ViewModel;
@@ -29,6 +30,7 @@ internal class AddUserViewModel : ViewModelBase
         set
         {
             SetField(ref _password, value, nameof(Password));
+            Debug.WriteLine(_password);
             ValidatePassword();
         }
     }
@@ -39,6 +41,7 @@ internal class AddUserViewModel : ViewModelBase
         set
         {
             SetField(ref _confirmPassword, value, nameof(ConfirmPassword));
+            Debug.WriteLine(_confirmPassword);
             ValidatePassword();
         }
     }
@@ -99,6 +102,11 @@ internal class AddUserViewModel : ViewModelBase
         get => _passwordValidatorErrors;
         set => SetField(ref _passwordValidatorErrors, value, nameof(PasswordValidatorErrors));
     }
+    public string ConfirmPasswordValidatorErrors
+    {
+        get => _confirmPasswordValidatorErrors;
+        set => SetField(ref _confirmPasswordValidatorErrors, value, nameof(ConfirmPasswordValidatorErrors));
+    }
 
     public string FirstNameValidatorErrors
     {
@@ -126,8 +134,9 @@ internal class AddUserViewModel : ViewModelBase
     private string _usernameValidatorErrors = string.Empty;
     private string _emailValidatorErrors = string.Empty;
     private string _passwordValidatorErrors = string.Empty;
-    private string _firstNameValidatorErrors;
-    private string _lastNameValidatorErrors;
+    private string _confirmPasswordValidatorErrors = string.Empty;
+    private string _firstNameValidatorErrors = string.Empty;
+    private string _lastNameValidatorErrors = string.Empty;
     #endregion
 
     #region Constructors
@@ -141,18 +150,12 @@ internal class AddUserViewModel : ViewModelBase
 
     private void ValidatePassword()
     {
-        if (_password != _confirmPassword)
-        {
-            PasswordValidatorErrors = _resourceManager.GetString("NotMatchPasswordConfirm");
-        }
-        else if (_password.Length < 8)
-        {
-            PasswordValidatorErrors = _resourceManager.GetString("MustHaveAtLeast8Characters");
-        }
-        else
-        {
-            PasswordValidatorErrors = string.Empty;
-        }
+        var passwordValidator = new PasswordValidator(_resourceManager).Validate(_password);
+        PasswordValidatorErrors = ValidationErrors.GetErrorsFormatted(passwordValidator);
+
+        var confirmPasswordValidator = new ConfirmPasswordValidator(_resourceManager).Validate((_password, _confirmPassword));
+        ConfirmPasswordValidatorErrors = ValidationErrors.GetErrorsFormatted(confirmPasswordValidator);
+
     }
 
     #endregion
