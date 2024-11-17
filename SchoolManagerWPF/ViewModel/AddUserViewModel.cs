@@ -180,7 +180,7 @@ internal class AddUserViewModel : ViewModelBase
     }
 
     public Action? SuccessfulUserAdd;
-    public Action? FailedUserAdd;
+    public Action<string>? FailedUserAdd;
     #endregion
 
     #region Commands

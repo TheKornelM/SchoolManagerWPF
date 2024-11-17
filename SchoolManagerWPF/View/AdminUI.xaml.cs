@@ -22,6 +22,10 @@ namespace SchoolManagerWPF.View
             {
                 MessageBox.Show(UIResourceFactory.GetNewResource().GetString("SuccessfullyRegistration"));
             });
+            vm.FailedUserAdd = new Action<string>((message) =>
+            {
+                MessageBox.Show(message);
+            });
             Users.DataContext = vm;
         }
     }

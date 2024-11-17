@@ -52,6 +52,11 @@ internal class AddUserCommand : ICommand
             switch (_addUserViewModel.SelectedRole)
             {
                 case Role.Student:
+                    if (_addUserViewModel.Class == null)
+                    {
+                        throw new NullReferenceException();
+                    }
+
                     await userManager.AddStudentAsync(new Student() { User = user, Class = _addUserViewModel.Class });
                     break;
                 case Role.Teacher:
@@ -64,7 +69,7 @@ internal class AddUserCommand : ICommand
         }
         catch (Exception ex)
         {
-            _addUserViewModel.FailedUserAdd?.Invoke();
+            _addUserViewModel.FailedUserAdd?.Invoke(ex.Message);
         }
 
 
