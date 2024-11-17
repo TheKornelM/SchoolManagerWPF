@@ -13,12 +13,17 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Content="{Binding LabelContent, RelativeSource={RelativeSource AncestorType=UserControl}}"
+        <Label
                HorizontalAlignment="Stretch"
                VerticalAlignment="Top"
                Margin="10,0,0,0"
                Grid.Column="0"
-               Grid.Row="0" />
+               Grid.Row="0">
+            <TextBlock TextWrapping="Wrap"
+                       Text="{Binding LabelContent, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                       HorizontalAlignment="Stretch"
+                       Background="{x:Null}" />
+        </Label>
         <TextBox Margin="10,0,0,0"
                  TextWrapping="Wrap"
                  Text="{Binding FieldValue, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
