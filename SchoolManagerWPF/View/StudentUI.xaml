@@ -6,11 +6,13 @@
         xmlns:local="clr-namespace:SchoolManagerWPF.View"
         xmlns:resx="clr-namespace:SchoolManagerModel.Resources;assembly=SchoolManagerModel"
         mc:Ignorable="d"
-        Title="StudentUI" Height="450" Width="800">
+        Title="StudentUI"
+        Height="450"
+        Width="800">
     <Grid>
         <TabControl>
             <TabItem Header="{x:Static resx:UI.Marks}">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5" />
             </TabItem>
         </TabControl>
     </Grid>

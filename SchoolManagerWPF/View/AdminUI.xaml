@@ -6,86 +6,126 @@
         xmlns:local="clr-namespace:SchoolManagerWPF.View"
         xmlns:resx="clr-namespace:SchoolManagerModel.Resources;assembly=SchoolManagerModel"
         xmlns:controls="clr-namespace:SchoolManagerWPF.View.Controls"
+        xmlns:converters="clr-namespace:SchoolManagerWPF.Converters"
         mc:Ignorable="d"
-        Title="AdminUI" Height="800" Width="800">
+        Title="AdminUI"
+        Height="921"
+        Width="800">
+    <Window.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:RoleToIntConverter x:Key="RoleToIntConverter" />
+    </Window.Resources>
     <Grid>
         <TabControl>
-            <TabItem Header="{x:Static resx:UI.Users}" Background="{x:Null}">
+            <TabItem Header="{x:Static resx:UI.Users}"
+                     Background="{x:Null}">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <Grid Background="#FFE5E5E5" Margin="-1,0,1,0" Name="Users">
+                    <Grid Background="#FFE5E5E5"
+                          Margin="-1,0,1,0"
+                          Name="Users">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50*"/>
-                            <ColumnDefinition Width="50*"/>
+                            <ColumnDefinition Width="45*" />
+                            <ColumnDefinition Width="10*" />
+                            <ColumnDefinition Width="45*" />
                         </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <!-- Username Field -->
+                            <controls:ValidatedField LabelContent="{x:Static resx:UI.Username}"
+                                                     FieldValue="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                     ValidationError="{Binding UsernameValidatorErrors}"
+                                                     Grid.Row="0" />
 
-                        <!-- Username Field -->
-                        <controls:ValidatedField 
-                            LabelContent="{x:Static resx:UI.Username}" 
-                            FieldValue="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                            ValidationError="{Binding UsernameValidatorErrors}" 
-                            Grid.Row="0"/>
+                            <!-- First Name Field -->
+                            <controls:ValidatedField LabelContent="{x:Static resx:UI.FirstName}"
+                                                     FieldValue="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                     ValidationError="{Binding FirstNameValidatorErrors}"
+                                                     Grid.Row="1" />
 
-                        <!-- First Name Field -->
-                        <controls:ValidatedField 
-                            LabelContent="{x:Static resx:UI.FirstName}" 
-                            FieldValue="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                            ValidationError="{Binding FirstNameValidatorErrors}" 
-                            Grid.Row="1"/>
+                            <!-- Last Name Field -->
+                            <controls:ValidatedField LabelContent="{x:Static resx:UI.LastName}"
+                                                     FieldValue="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                     ValidationError="{Binding LastNameValidatorErrors}"
+                                                     Grid.Row="2" />
 
-                        <!-- Last Name Field -->
-                        <controls:ValidatedField 
-                            LabelContent="{x:Static resx:UI.LastName}" 
-                            FieldValue="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                            ValidationError="{Binding LastNameValidatorErrors}" 
-                            Grid.Row="2"/>
+                            <controls:ValidatedPasswordField LabelContent="{x:Static resx:UI.Password}"
+                                                             Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                             ValidationError="{Binding PasswordValidatorErrors}"
+                                                             Grid.Row="3" />
 
-                        <controls:ValidatedPasswordField 
-                            LabelContent="{x:Static resx:UI.Password}" 
-                            Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                            ValidationError="{Binding PasswordValidatorErrors}" 
-                            Grid.Row="3"/>
+                            <controls:ValidatedPasswordField LabelContent="{x:Static resx:UI.ConfirmPassword}"
+                                                             Password="{Binding ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                             ValidationError="{Binding ConfirmPasswordValidatorErrors}"
+                                                             Grid.Row="4" />
 
-                        <controls:ValidatedPasswordField 
-                            LabelContent="{x:Static resx:UI.ConfirmPassword}" 
-                            Password="{Binding ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                            ValidationError="{Binding ConfirmPasswordValidatorErrors}" 
-                            Grid.Row="4"/>
+                            <controls:ValidatedField LabelContent="{x:Static resx:UI.EmailAddress}"
+                                                     FieldValue="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                     ValidationError="{Binding EmailValidatorErrors}"
+                                                     Grid.Row="5" />
 
-                        <controls:ValidatedField 
-                            LabelContent="{x:Static resx:UI.EmailAddress}" 
-                            FieldValue="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            ValidationError="{Binding EmailValidatorErrors}" 
-                            Grid.Row="5"/>
+                            <Label Grid.Row="6"
+                                   Content="{x:Static resx:UI.Role}"
+                                   Margin="10,0,0,0"></Label>
+                            <ComboBox Grid.Row="7"
+                                      SelectedIndex="{Binding SelectedRole, Converter={StaticResource RoleToIntConverter}}"
+                                      Margin="10,0,0,0">
+                                <ComboBoxItem Content="{x:Static resx:UI.Student}" />
+                                <ComboBoxItem Content="{x:Static resx:UI.Teacher}" />
+                                <ComboBoxItem Content="{x:Static resx:UI.Administrator}" />
+                            </ComboBox>
 
-                        <Label Grid.Row="6" Content="{x:Static resx:UI.Role}"></Label>
-                        <ComboBox Grid.Row="7">
-                            <ComboBoxItem Content="{x:Static resx:UI.Student}"></ComboBoxItem>
-                            <ComboBoxItem Content="{x:Static resx:UI.Teacher}"></ComboBoxItem>
-                            <ComboBoxItem Content="{x:Static resx:UI.Administrator}"></ComboBoxItem>
-                        </ComboBox>
+                            <Button Content="{x:Static resx:UI.AddUser}"
+                                    HorizontalAlignment="Center"
+                                    Margin="0,50,0,0"
+                                    VerticalAlignment="Top"
+                                    Height="50"
+                                    MinWidth="200"
+                                    Grid.Row="9"
+                                    Command="{Binding AddUserCommand}" />
+                        </Grid>
+
+                        <Grid Grid.Column="2"
+                              Visibility="{Binding IsStudent, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Label Content="{x:Static resx:UI.Class}"
+                                   Grid.Row="0" />
+                            <ComboBox Grid.Row="1"
+                                      ItemsSource="{Binding Classes}"
+                                      SelectedItem="{Binding Class}"
+                                      DisplayMemberPath="Name" />
+                            <Label Content="{x:Static resx:UI.AssignedSubjects}"
+                                   Grid.Row="4"
+                                   Margin="1,38,-1,-74" />
+
+                        </Grid>
 
                     </Grid>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="{x:Static resx:UI.Classes}">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5" />
             </TabItem>
-            <TabItem Header="{x:Static resx:UI.AddSubject}"/>
-            <TabItem Header="{x:Static resx:UI.Roster}"/>
+            <TabItem Header="{x:Static resx:UI.AddSubject}" />
+            <TabItem Header="{x:Static resx:UI.Roster}" />
         </TabControl>
     </Grid>
 </Window>

@@ -3,22 +3,67 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:resx="clr-namespace:SchoolManagerModel.Resources;assembly=SchoolManagerModel"  
-    mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-
+        xmlns:resx="clr-namespace:SchoolManagerModel.Resources;assembly=SchoolManagerModel"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="400"
+        Width="500">
 
     <Grid>
-        <Label Content="{x:Static resx:UI.Language}" HorizontalAlignment="Left" Margin="236,68,0,0" VerticalAlignment="Top" FontSize="72"/>
-        <ComboBox HorizontalAlignment="Center" Margin="0,179,0,0" VerticalAlignment="Top" Width="294"  Name="languageComboBox" SelectedIndex="{Binding LanguageId}">
-            <ComboBoxItem Content="Magyar"/>
-            <ComboBoxItem Content="English"/>
-        </ComboBox>
-        <Button Content="{x:Static resx:UI.Continue}" 
-         HorizontalAlignment="Center" 
-         Margin="0,295,0,0" 
-         VerticalAlignment="Top" 
-         Height="120" 
-         Width="304" Name="continueButton" Command="{Binding ShowLoginCommand}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30px" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30px" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30px" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="30px" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="1"
+              Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="30px" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="30px" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Language Label -->
+            <Label Content="{x:Static resx:UI.Language}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   FontSize="72"
+                   Grid.Row="0"
+                   Width="Auto"
+                   Height="Auto" />
+
+            <!-- Language ComboBox -->
+            <ComboBox HorizontalAlignment="Center"
+                      VerticalAlignment="Top"
+                      Width="Auto"
+                      Height="Auto"
+                      Name="languageComboBox"
+                      SelectedIndex="{Binding LanguageId}"
+                      Grid.Row="2"
+                      MinWidth="200px">
+                <ComboBoxItem Content="Magyar" />
+                <ComboBoxItem Content="English" />
+            </ComboBox>
+
+            <!-- Continue Button -->
+            <Button Content="{x:Static resx:UI.Continue}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Height="100"
+                    Width="Auto"
+                    Name="continueButton"
+                    Command="{Binding ShowLoginCommand}"
+                    Grid.Row="4"
+                    MinWidth="200px" />
+        </Grid>
     </Grid>
 </Window>

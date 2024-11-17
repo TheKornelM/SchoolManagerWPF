@@ -1,5 +1,5 @@
 ﻿using SchoolManagerModel.Entities.UserModel;
-using SchoolManagerWPF.Utils;
+using SchoolManagerModel.Utils;
 using SchoolManagerWPF.ViewModel;
 using System.Windows;
 
@@ -18,6 +18,10 @@ namespace SchoolManagerWPF.View
             // View models
 
             var vm = new AddUserViewModel(UIResourceFactory.GetNewResource());
+            vm.SuccessfulUserAdd = new Action(() =>
+            {
+                MessageBox.Show(UIResourceFactory.GetNewResource().GetString("SuccessfullyRegistration"));
+            });
             Users.DataContext = vm;
         }
     }

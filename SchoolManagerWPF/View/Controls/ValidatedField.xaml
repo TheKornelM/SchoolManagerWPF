@@ -1,10 +1,11 @@
 ﻿<UserControl x:Class="SchoolManagerWPF.View.Controls.ValidatedField"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="300">
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="100"
+             d:DesignWidth="300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -12,10 +13,28 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Content="{Binding LabelContent, RelativeSource={RelativeSource AncestorType=UserControl}}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,0,0,0" Grid.Column="0" Grid.Row="0"/>
-        <TextBox Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding FieldValue, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0"/>
-        <Label Margin="5,5,5,0" VerticalAlignment="Top" FontWeight="Bold" Grid.Row="2" Grid.Column="0">
-            <TextBlock TextWrapping="Wrap" Text="{Binding ValidationError, RelativeSource={RelativeSource AncestorType=UserControl}}" HorizontalAlignment="Stretch" Background="{x:Null}" Foreground="Red"/>
+        <Label Content="{Binding LabelContent, RelativeSource={RelativeSource AncestorType=UserControl}}"
+               HorizontalAlignment="Stretch"
+               VerticalAlignment="Top"
+               Margin="10,0,0,0"
+               Grid.Column="0"
+               Grid.Row="0" />
+        <TextBox Margin="10,0,0,0"
+                 TextWrapping="Wrap"
+                 Text="{Binding FieldValue, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 VerticalAlignment="Top"
+                 Grid.Row="1"
+                 Grid.Column="0" />
+        <Label Margin="5,5,5,0"
+               VerticalAlignment="Top"
+               FontWeight="Bold"
+               Grid.Row="2"
+               Grid.Column="0">
+            <TextBlock TextWrapping="Wrap"
+                       Text="{Binding ValidationError, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                       HorizontalAlignment="Stretch"
+                       Background="{x:Null}"
+                       Foreground="Red" />
         </Label>
     </Grid>
 </UserControl>
