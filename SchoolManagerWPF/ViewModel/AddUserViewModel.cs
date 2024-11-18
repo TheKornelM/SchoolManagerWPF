@@ -6,7 +6,9 @@ using SchoolManagerModel.Utils;
 using SchoolManagerModel.Validators;
 using SchoolManagerWPF.ViewModel.Commands;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Resources;
+using System.Windows;
 
 namespace SchoolManagerWPF.ViewModel;
 
@@ -21,8 +23,9 @@ internal class AddUserViewModel : ViewModelBase
     private string _firstName = string.Empty;
     private string _lastName = string.Empty;
     private Role _selectedRole = Role.Student;
-    private bool _isStudent = false;
+    private bool _isStudent = true;
     private Class? _class;
+    private bool _allSubjectsSelected = false;
 
     private string _usernameValidatorErrors = string.Empty;
     private string _emailValidatorErrors = string.Empty;
@@ -32,6 +35,7 @@ internal class AddUserViewModel : ViewModelBase
     private string _lastNameValidatorErrors = string.Empty;
     private bool _hasSelectedClass;
     public ObservableCollection<Class> _classes = [];
+    public ObservableCollection<CheckBoxListItem<Subject>> _subjects = [];
     #endregion
 
     #region Public Properties
@@ -140,6 +144,10 @@ internal class AddUserViewModel : ViewModelBase
         {
             SetField(ref _class, value, nameof(Class));
             AddUserCommand.NotifyCanExecuteChanged();
+            if (_class != null)
+            {
+                GetClassSubjectsAsync(_class);
+            }
         }
     }
 
@@ -179,12 +187,33 @@ internal class AddUserViewModel : ViewModelBase
         set => SetField(ref _lastNameValidatorErrors, value, nameof(LastNameValidatorErrors));
     }
 
+    public ObservableCollection<CheckBoxListItem<Subject>> Subjects
+    {
+        get => _subjects;
+        set => SetField(ref _subjects, value, nameof(Subjects));
+    }
+
+    public bool AllSubjectsSelected
+    {
+        get => _allSubjectsSelected;
+        set => SetField(ref _allSubjectsSelected, value, nameof(AllSubjectsSelected));
+    }
+
+
     public Action? SuccessfulUserAdd;
     public Action<string>? FailedUserAdd;
     #endregion
 
     #region Commands
     public AddUserCommand AddUserCommand { get; }
+    public SelectAllSubjectsCommand SelectAllSubjectsCommand { get; }
+    #endregion
+
+    #region Events
+    public void SelectChange(object sender, RoutedEventArgs e)
+    {
+        CheckAllSelected();
+    }
     #endregion
 
     #region Constructor
@@ -192,7 +221,9 @@ internal class AddUserViewModel : ViewModelBase
     {
         _resourceManager = resourceManager;
         AddUserCommand = new AddUserCommand(this);
+        SelectAllSubjectsCommand = new SelectAllSubjectsCommand(this);
         GetClassesAsync();
+        Class = _classes.FirstOrDefault();
     }
     #endregion
 
@@ -202,6 +233,21 @@ internal class AddUserViewModel : ViewModelBase
         ClassDatabase db = new ClassDatabase(new SchoolDbContext());
         var classManager = new ClassManager(db);
         _classes = new ObservableCollection<Class>(await classManager.GetClassesAsync());
+    }
+
+    private async void GetClassSubjectsAsync(Class cls)
+    {
+        ClassDatabase db = new ClassDatabase(new SchoolDbContext());
+        var classManager = new ClassManager(db);
+        var subjects = await classManager.GetClassSubjectsAsync(cls);
+
+        Subjects.Clear();
+        foreach (var subject in subjects)
+        {
+            Subjects.Add(new CheckBoxListItem<Subject> { Item = subject });
+        }
+
+        Debug.WriteLine(Subjects.Count);
     }
 
     private async void ValidateUsernameAsync(string username)
@@ -238,6 +284,13 @@ internal class AddUserViewModel : ViewModelBase
         {
             EmailValidatorErrors = ex.Message;
         }
+    }
+
+    // Call this method when IsChecked changes or when the collection changes
+    private void CheckAllSelected()
+    {
+        // Check if all subjects are selected
+        AllSubjectsSelected = _subjects.All(item => item.IsChecked);
     }
     #endregion
 }

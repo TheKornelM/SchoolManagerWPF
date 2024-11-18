@@ -13,8 +13,7 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label
-               HorizontalAlignment="Stretch"
+        <Label HorizontalAlignment="Stretch"
                VerticalAlignment="Top"
                Margin="10,0,0,0"
                Grid.Column="0"

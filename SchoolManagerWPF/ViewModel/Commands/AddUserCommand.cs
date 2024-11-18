@@ -57,7 +57,17 @@ internal class AddUserCommand : ICommand
                         throw new NullReferenceException();
                     }
 
-                    await userManager.AddStudentAsync(new Student() { User = user, Class = _addUserViewModel.Class });
+                    var student = new Student() { User = user, Class = _addUserViewModel.Class };
+                    await userManager.AddStudentAsync(student);
+
+                    var subjectDatabase = new SubjectDatabase(dbContext);
+                    var subjectManager = new SubjectManager(subjectDatabase);
+                    var subjects = _addUserViewModel.Subjects
+                        .Where(x => x.IsChecked)
+                        .Select(x => x.Item)
+                        .ToList();
+                    await subjectManager.AssignSubjectsToStudentAsync(student, subjects);
+
                     break;
                 case Role.Teacher:
                     await userManager.AddTeacherAsync(new Teacher() { User = user });
@@ -66,14 +76,16 @@ internal class AddUserCommand : ICommand
                     await userManager.AddAdminAsync(new Admin() { User = user });
                     break;
             }
+
+            _addUserViewModel.SuccessfulUserAdd?.Invoke();
         }
         catch (Exception ex)
         {
+            Debug.WriteLine(ex.Message);
             _addUserViewModel.FailedUserAdd?.Invoke(ex.Message);
         }
 
 
-        _addUserViewModel.SuccessfulUserAdd?.Invoke();
     }
 
     public void NotifyCanExecuteChanged()

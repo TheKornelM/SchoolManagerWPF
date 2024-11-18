@@ -102,6 +102,9 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto" />
+                                <RowDefinition Height="30px" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto" />
@@ -113,8 +116,28 @@
                                       SelectedItem="{Binding Class}"
                                       DisplayMemberPath="Name" />
                             <Label Content="{x:Static resx:UI.AssignedSubjects}"
-                                   Grid.Row="4"
-                                   Margin="1,38,-1,-74" />
+                                   Grid.Row="3" />
+                            <controls:CheckBoxList Objects="{Binding Subjects, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                   Grid.Row="5" />
+                            <Button Grid.Row="7"
+                                    Command="{Binding SelectAllSubjectsCommand}">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=AllSubjectsSelected}"
+                                                         Value="True">
+                                                <Setter Property="Content"
+                                                        Value="Unselect all" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=AllSubjectsSelected}"
+                                                         Value="False">
+                                                <Setter Property="Content"
+                                                        Value="Select all" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
 
                         </Grid>
 
