@@ -48,4 +48,31 @@ public partial class ValidatedPasswordField : UserControl
             Password = passwordBox.Password; // Bind the PasswordBox's Password property
         }
     }
+
+    public static readonly DependencyProperty ResetPasswordProperty =
+    DependencyProperty.Register("ResetPassword", typeof(bool), typeof(ValidatedPasswordField),
+        new PropertyMetadata(false, OnResetPasswordChanged));
+
+    public bool ResetPassword
+    {
+        get { return (bool)GetValue(ResetPasswordProperty); }
+        set { SetValue(ResetPasswordProperty, value); }
+    }
+
+    // Handle ResetPassword property change
+    private static void OnResetPasswordChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is ValidatedPasswordField validatedPasswordField && (bool)e.NewValue)
+        {
+            validatedPasswordField.ResetPasswordBox();
+        }
+    }
+
+    // Method to clear the PasswordBox
+    private void ResetPasswordBox()
+    {
+        this.PasswordField.Clear();
+        Password = string.Empty; // Reset SecurePassword
+        ResetPassword = false; // Reset the flag after clearing
+    }
 }

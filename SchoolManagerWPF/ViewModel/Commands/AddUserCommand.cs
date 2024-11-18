@@ -77,6 +77,7 @@ internal class AddUserCommand : ICommand
                     break;
             }
 
+            _addUserViewModel.ResetPassword = true;
             _addUserViewModel.SuccessfulUserAdd?.Invoke();
         }
         catch (Exception ex)

@@ -61,12 +61,17 @@
                             <controls:ValidatedPasswordField LabelContent="{x:Static resx:UI.Password}"
                                                              Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                              ValidationError="{Binding PasswordValidatorErrors}"
-                                                             Grid.Row="3" />
+                                                             Grid.Row="3"
+                                                             ResetPassword="{Binding ResetPassword}"
+                                                             x:Name="PasswordField"/>
 
                             <controls:ValidatedPasswordField LabelContent="{x:Static resx:UI.ConfirmPassword}"
                                                              Password="{Binding ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                              ValidationError="{Binding ConfirmPasswordValidatorErrors}"
-                                                             Grid.Row="4" />
+                                                            ResetPassword="{Binding ResetPassword}" 
+
+                                                             Grid.Row="4" 
+                                                             x:Name="ConfirmPasswordField"/>
 
                             <controls:ValidatedField LabelContent="{x:Static resx:UI.EmailAddress}"
                                                      FieldValue="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

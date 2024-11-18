@@ -24,6 +24,7 @@ internal class AddUserViewModel : ViewModelBase
     private string _lastName = string.Empty;
     private Role _selectedRole = Role.Student;
     private bool _isStudent = true;
+    private bool _resetPassword = false;
     private Class? _class;
     private bool _allSubjectsSelected = false;
 
@@ -200,6 +201,12 @@ internal class AddUserViewModel : ViewModelBase
         set => SetField(ref _allSubjectsSelected, value, nameof(AllSubjectsSelected));
     }
 
+    public bool ResetPassword
+    {
+        get => _resetPassword;
+        set => SetField(ref _resetPassword, value, nameof(ResetPassword));
+    }
+
 
     public Action? SuccessfulUserAdd;
     public Action<string>? FailedUserAdd;
@@ -293,5 +300,7 @@ internal class AddUserViewModel : ViewModelBase
         // Check if all subjects are selected
         AllSubjectsSelected = _subjects.All(item => item.IsChecked);
     }
+
     #endregion
+
 }

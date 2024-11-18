@@ -20,6 +20,9 @@ namespace SchoolManagerWPF.View
             var vm = new AddUserViewModel(UIResourceFactory.GetNewResource());
             vm.SuccessfulUserAdd = new Action(() =>
             {
+                PasswordField.Password = string.Empty;
+                ConfirmPasswordField.Password = string.Empty;
+                Users.DataContext = new AddUserViewModel(UIResourceFactory.GetNewResource());
                 MessageBox.Show(UIResourceFactory.GetNewResource().GetString("SuccessfullyRegistration"));
             });
             vm.FailedUserAdd = new Action<string>((message) =>
