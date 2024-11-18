@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace SchoolManagerWPF.ViewModel.Commands;
 
-internal class AddUserCommand : ICommand
+public class AddUserCommand : ICommand
 
 {
     private AddUserViewModel _addUserViewModel;

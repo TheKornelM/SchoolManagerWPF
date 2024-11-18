@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace SchoolManagerWPF.ViewModel;
 
-internal class LoginViewModel : ViewModelBase
+public class LoginViewModel : ViewModelBase
 {
     #region Public fields
     public string Username

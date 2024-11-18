@@ -2,7 +2,7 @@
 
 namespace SchoolManagerWPF.ViewModel;
 
-internal class LanguageSelectViewModel : ViewModelBase
+public class LanguageSelectViewModel : ViewModelBase
 {
     public ShowLoginCommand ShowLoginCommand { get; private set; }
 

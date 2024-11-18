@@ -12,7 +12,7 @@ using System.Windows;
 
 namespace SchoolManagerWPF.ViewModel;
 
-internal class AddUserViewModel : ViewModelBase
+public class AddUserViewModel : ViewModelBase
 {
     #region Private Fields
     private readonly ResourceManager _resourceManager;
@@ -35,8 +35,8 @@ internal class AddUserViewModel : ViewModelBase
     private string _firstNameValidatorErrors = string.Empty;
     private string _lastNameValidatorErrors = string.Empty;
     private bool _hasSelectedClass;
-    public ObservableCollection<Class> _classes = [];
-    public ObservableCollection<CheckBoxListItem<Subject>> _subjects = [];
+    private ObservableCollection<Class> _classes = [];
+    private ObservableCollection<CheckBoxListItem<Subject>> _subjects = [];
     #endregion
 
     #region Public Properties
