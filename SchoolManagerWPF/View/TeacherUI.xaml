@@ -1,0 +1,20 @@
+﻿<Window x:Class="SchoolManagerWPF.View.TeacherUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SchoolManagerWPF.View"
+        xmlns:resx="clr-namespace:SchoolManagerModel.Resources;assembly=SchoolManagerModel"
+        mc:Ignorable="d"
+        Title="TeacherUI"
+        Height="450"
+        Width="800">
+    <Grid>
+        <TabControl>
+            <TabItem Header="{x:Static resx:UI.Marks}">
+                <Grid Background="#FFE5E5E5" />
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
