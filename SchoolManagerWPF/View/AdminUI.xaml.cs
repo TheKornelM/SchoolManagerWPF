@@ -30,6 +30,11 @@ namespace SchoolManagerWPF.View
                 MessageBox.Show(message);
             });
             Users.DataContext = vm;
+
+            // ClassesViewModel
+
+            var classesViewModel = new ClassesViewModel();
+            Classes.DataContext = classesViewModel;
         }
     }
 }
