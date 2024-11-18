@@ -2,6 +2,7 @@
 using SchoolManagerModel.Entities.UserModel;
 using SchoolManagerModel.Managers;
 using SchoolManagerModel.Persistence;
+using System.Diagnostics;
 using System.Windows.Input;
 
 namespace SchoolManagerWPF.ViewModel.Commands;
@@ -65,6 +66,7 @@ internal class LoginUserCommand : ICommand
         }
         catch (Exception ex)
         {
+            Debug.WriteLine(ex.Message);
             _viewModel.FailedLogin?.Invoke(ex.Message);
         }
     }
