@@ -7,11 +7,17 @@
              d:DesignHeight="100"
              d:DesignWidth="300">
     <Grid>
-        <ListBox ItemsSource="{Binding Objects, RelativeSource={RelativeSource AncestorType=UserControl}}">
+        <!-- ListBox to display the checkboxes -->
+        <ListBox Name="CheckBoxListBox"
+                 ItemsSource="{Binding Objects, RelativeSource={RelativeSource AncestorType=UserControl}}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <CheckBox Content="{Binding Item.Name}"
-                              IsChecked="{Binding IsChecked}" />
+                              IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                              Checked="CheckBox_Checked"
+                              Unchecked="CheckBox_Unchecked"
+                              VerticalContentAlignment="Center"
+                              />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

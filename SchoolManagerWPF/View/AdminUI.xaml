@@ -16,16 +16,15 @@
         <converters:RoleToIntConverter x:Key="RoleToIntConverter" />
     </Window.Resources>
     <Grid>
-        <TabControl>
+        <TabControl Background="#FFE5E5E5">
             <TabItem Header="{x:Static resx:UI.Users}"
                      Background="{x:Null}">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <Grid Background="#FFE5E5E5"
-                          Margin="-1,0,1,0"
+                    <Grid Margin="30,30,30,30"
                           Name="Users">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="45*" />
-                            <ColumnDefinition Width="10*" />
+                            <ColumnDefinition Width="30px" />
                             <ColumnDefinition Width="45*" />
                         </Grid.ColumnDefinitions>
                         <Grid>
@@ -38,9 +37,7 @@
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="30px" />
                                 <RowDefinition Height="auto" />
                             </Grid.RowDefinitions>
                             <!-- Username Field -->
@@ -78,10 +75,9 @@
 
                             <Label Grid.Row="6"
                                    Content="{x:Static resx:UI.Role}"
-                                   Margin="10,0,0,0"></Label>
+                                   ></Label>
                             <ComboBox Grid.Row="7"
-                                      SelectedIndex="{Binding SelectedRole, Converter={StaticResource RoleToIntConverter}}"
-                                      Margin="10,0,0,0">
+                                      SelectedIndex="{Binding SelectedRole, Converter={StaticResource RoleToIntConverter}}">
                                 <ComboBoxItem Content="{x:Static resx:UI.Student}" />
                                 <ComboBoxItem Content="{x:Static resx:UI.Teacher}" />
                                 <ComboBoxItem Content="{x:Static resx:UI.Administrator}" />
@@ -89,7 +85,6 @@
 
                             <Button Content="{x:Static resx:UI.AddUser}"
                                     HorizontalAlignment="Center"
-                                    Margin="0,50,0,0"
                                     VerticalAlignment="Top"
                                     Height="50"
                                     MinWidth="200"
@@ -106,7 +101,7 @@
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="30px" />
                                 <RowDefinition Height="auto" />
                             </Grid.RowDefinitions>
                             <Label Content="{x:Static resx:UI.Class}"
@@ -118,21 +113,26 @@
                             <Label Content="{x:Static resx:UI.AssignedSubjects}"
                                    Grid.Row="3" />
                             <controls:CheckBoxList Objects="{Binding Subjects, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                   Grid.Row="5" />
+                                                   Grid.Row="5"
+                                                   AllSubjectsSelected="{Binding AllSubjectsSelected, Mode=TwoWay}" />
                             <Button Grid.Row="7"
-                                    Command="{Binding SelectAllSubjectsCommand}">
+                                    Command="{Binding SelectAllSubjectsCommand}"
+                                    MinHeight="50px"
+                                    Width="auto"
+                                    MaxWidth="200px"
+                                    >
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=AllSubjectsSelected}"
                                                          Value="True">
                                                 <Setter Property="Content"
-                                                        Value="Unselect all" />
+                                                        Value="{x:Static resx:UI.UnselectAll}" />
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding Path=AllSubjectsSelected}"
                                                          Value="False">
                                                 <Setter Property="Content"
-                                                        Value="Select all" />
+                                                        Value="{x:Static resx:UI.SelectAll}" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>

@@ -148,6 +148,7 @@ internal class AddUserViewModel : ViewModelBase
             {
                 GetClassSubjectsAsync(_class);
             }
+            AllSubjectsSelected = false;
         }
     }
 

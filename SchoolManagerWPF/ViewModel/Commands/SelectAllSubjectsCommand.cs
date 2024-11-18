@@ -25,7 +25,7 @@ internal class SelectAllSubjectsCommand : ICommand
             return;
         }
 
-        Debug.WriteLine("Checked boxes: " + _viewModel.Subjects.Count(x => x.IsChecked));
+        Debug.WriteLine("Checked boxes before command: " + _viewModel.Subjects.Count(x => x.IsChecked));
 
         bool isAllChecked = _viewModel.Subjects.All(x => x.IsChecked);
         _viewModel.AllSubjectsSelected = !isAllChecked;
@@ -33,6 +33,9 @@ internal class SelectAllSubjectsCommand : ICommand
         {
             item.IsChecked = !isAllChecked;
         }
+
+        Debug.WriteLine("Checked boxes after command: " + _viewModel.Subjects.Count(x => x.IsChecked));
+
 
     }
 }

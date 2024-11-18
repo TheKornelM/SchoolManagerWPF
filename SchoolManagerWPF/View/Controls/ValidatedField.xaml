@@ -15,7 +15,6 @@
         </Grid.RowDefinitions>
         <Label HorizontalAlignment="Stretch"
                VerticalAlignment="Top"
-               Margin="10,0,0,0"
                Grid.Column="0"
                Grid.Row="0">
             <TextBlock TextWrapping="Wrap"
@@ -23,13 +22,13 @@
                        HorizontalAlignment="Stretch"
                        Background="{x:Null}" />
         </Label>
-        <TextBox Margin="10,0,0,0"
+        <TextBox
                  TextWrapping="Wrap"
                  Text="{Binding FieldValue, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top"
                  Grid.Row="1"
                  Grid.Column="0" />
-        <Label Margin="5,5,5,0"
+        <Label
                VerticalAlignment="Top"
                FontWeight="Bold"
                Grid.Row="2"
