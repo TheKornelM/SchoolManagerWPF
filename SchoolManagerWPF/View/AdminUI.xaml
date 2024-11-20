@@ -23,10 +23,12 @@
                 <tabpages:AddUser x:Name="AddUser"></tabpages:AddUser>
             </TabItem>
             <TabItem Header="{x:Static resx:UI.Classes}">
-                <tabpages:Classes></tabpages:Classes>
+                <tabpages:Classes />
             </TabItem>
             <TabItem Header="{x:Static resx:UI.AddSubject}" />
-            <TabItem Header="{x:Static resx:UI.Roster}" />
+            <TabItem Header="{x:Static resx:UI.Roster}">
+                <tabpages:Roster />
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
