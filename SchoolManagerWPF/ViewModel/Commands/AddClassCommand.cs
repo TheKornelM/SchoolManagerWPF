@@ -19,7 +19,7 @@ namespace SchoolManagerWPF.ViewModel.Commands
 
         public bool CanExecute(object? parameter)
         {
-            return new ClassValidator(_classesViewModel.ResourceManager).Validate((_classesViewModel.ClassYear, _classesViewModel.Class)).IsValid;
+            return new ClassStringValidator(_classesViewModel.ResourceManager).Validate((_classesViewModel.ClassYear, _classesViewModel.Class)).IsValid;
         }
 
         public async void Execute(object? parameter)

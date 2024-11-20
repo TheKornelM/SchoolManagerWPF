@@ -49,7 +49,7 @@ public class ClassesViewModel : ViewModelBase
         set
         {
             SetField(ref _classYear, value, nameof(ClassYear));
-            ClassYearValidationErrors = ValidationErrors.GetErrorsFormatted(new ClassYearValidator(ResourceManager).Validate(value));
+            ClassYearValidationErrors = ValidationErrors.GetErrorsFormatted(new ClassYearStringValidator(ResourceManager).Validate(value));
             AddClassCommand.NotifyCanExecuteChanged();
         }
     }

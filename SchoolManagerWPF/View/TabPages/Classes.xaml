@@ -15,6 +15,7 @@
         <converters:RoleToIntConverter x:Key="RoleToIntConverter" />
         <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
     </UserControl.Resources>
+    <ScrollViewer>
     <Grid Background="#FFE5E5E5"
           Name="ClassesGrid"
           Margin="30,30,30,30">
@@ -127,4 +128,5 @@
         </Grid>
 
     </Grid>
+    </ScrollViewer>
 </UserControl>
