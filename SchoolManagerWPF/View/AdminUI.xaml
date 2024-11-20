@@ -182,14 +182,15 @@
                               Grid.Row="0"
                               Grid.ColumnSpan="7">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID"
+                            <DataGridTextColumn Header="{x:Static resx:UI.ID}"
                                                 Binding="{Binding Id}"
                                                 IsReadOnly="True" />
-                            <DataGridTextColumn Header="Name"
+                            <DataGridTextColumn Header="{x:Static resx:UI.Name}"
                                                 Binding="{Binding Name, ValidatesOnDataErrors=True}" />
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Label Content="Class year:"
+                    <Label Content="{x:Static resx:UI.ClassYear}"
+                           ContentStringFormat="{}{0}:"
                            Grid.Row="2"
                            Grid.Column="0" />
                     <TextBox Text="{Binding ClassYear, Mode=TwoWay}"
@@ -218,7 +219,7 @@
                                        Foreground="Red" />
                         </Label>
                     </Grid>
-                    <Button Content="Add class"
+                    <Button Content="{x:Static resx:UI.AddClass}"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Command="{Binding AddClassCommand}"
@@ -228,7 +229,8 @@
                             Height="65"
                             MinWidth="150px"
                             Width="auto" />
-                    <Label Content="Class"
+                    <Label Content="{x:Static resx:UI.Class}"
+                           ContentStringFormat="{}{0}:"
                            Grid.Row="5"
                            Grid.Column="0" />
                     <TextBox Text="{Binding Class}"
