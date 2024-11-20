@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace SchoolManagerWPF.ViewModel.Commands;
 
-internal class LoginUserCommand : ICommand
+public class LoginUserCommand : ICommand
 {
     private LoginViewModel _viewModel;
     public event EventHandler? CanExecuteChanged;

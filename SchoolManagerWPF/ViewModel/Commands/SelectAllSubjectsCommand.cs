@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace SchoolManagerWPF.ViewModel.Commands;
 
-internal class SelectAllSubjectsCommand : ICommand
+public class SelectAllSubjectsCommand : ICommand
 {
     AddUserViewModel _viewModel;
     public SelectAllSubjectsCommand(AddUserViewModel viewModel)

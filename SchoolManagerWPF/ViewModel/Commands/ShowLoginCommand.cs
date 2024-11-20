@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace SchoolManagerWPF.ViewModel.Commands;
 
-internal class ShowLoginCommand : ICommand
+public class ShowLoginCommand : ICommand
 
 {
     private LanguageSelectViewModel _languageSelectViewModel;
