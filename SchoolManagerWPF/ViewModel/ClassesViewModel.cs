@@ -128,10 +128,5 @@ public class ClassesViewModel : ViewModelBase
         }
     }
 
-    private string GetNewClassValidationErrors()
-    {
-        return ValidationErrors.GetErrorsFormatted(new ClassValidator(ResourceManager).Validate((_classYear, _class)));
-    }
-
     #endregion
 }
