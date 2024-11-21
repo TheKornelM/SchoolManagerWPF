@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace SchoolManagerWPF.ViewModel.Commands;
 
@@ -25,17 +24,11 @@ public class SelectAllSubjectsCommand : ICommand
             return;
         }
 
-        Debug.WriteLine("Checked boxes before command: " + _viewModel.Subjects.Count(x => x.IsChecked));
-
         bool isAllChecked = _viewModel.Subjects.All(x => x.IsChecked);
         _viewModel.AllSubjectsSelected = !isAllChecked;
         foreach (var item in _viewModel.Subjects)
         {
             item.IsChecked = !isAllChecked;
         }
-
-        Debug.WriteLine("Checked boxes after command: " + _viewModel.Subjects.Count(x => x.IsChecked));
-
-
     }
 }

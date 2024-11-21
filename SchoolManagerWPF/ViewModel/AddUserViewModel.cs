@@ -6,7 +6,6 @@ using SchoolManagerModel.Utils;
 using SchoolManagerModel.Validators;
 using SchoolManagerWPF.ViewModel.Commands;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Resources;
 using System.Windows;
 
@@ -15,18 +14,20 @@ namespace SchoolManagerWPF.ViewModel;
 public class AddUserViewModel : ViewModelBase
 {
     #region Private Fields
-    private readonly ResourceManager _resourceManager;
     private string _username = string.Empty;
     private string _password = string.Empty;
     private string _confirmPassword = string.Empty;
     private string _email = string.Empty;
     private string _firstName = string.Empty;
     private string _lastName = string.Empty;
-    private Role _selectedRole = Role.Student;
     private bool _isStudent = true;
     private bool _resetPassword = false;
-    private Class? _class;
     private bool _allSubjectsSelected = false;
+    private readonly ResourceManager _resourceManager;
+    private Role _selectedRole = Role.Student;
+    private Class? _class;
+    private ObservableCollection<Class> _classes = [];
+    private ObservableCollection<CheckBoxListItem<Subject>> _subjects = [];
 
     private string _usernameValidatorErrors = string.Empty;
     private string _emailValidatorErrors = string.Empty;
@@ -35,8 +36,6 @@ public class AddUserViewModel : ViewModelBase
     private string _firstNameValidatorErrors = string.Empty;
     private string _lastNameValidatorErrors = string.Empty;
     private bool _hasSelectedClass;
-    private ObservableCollection<Class> _classes = [];
-    private ObservableCollection<CheckBoxListItem<Subject>> _subjects = [];
     #endregion
 
     #region Public Properties
@@ -254,8 +253,6 @@ public class AddUserViewModel : ViewModelBase
         {
             Subjects.Add(new CheckBoxListItem<Subject> { Item = subject });
         }
-
-        Debug.WriteLine(Subjects.Count);
     }
 
     private async void ValidateUsernameAsync(string username)
@@ -294,10 +291,8 @@ public class AddUserViewModel : ViewModelBase
         }
     }
 
-    // Call this method when IsChecked changes or when the collection changes
     private void CheckAllSelected()
     {
-        // Check if all subjects are selected
         AllSubjectsSelected = _subjects.All(item => item.IsChecked);
     }
 
