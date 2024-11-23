@@ -1,11 +1,10 @@
 ﻿using SchoolManagerModel.Utils;
-using SchoolManagerWPF.ViewModel;
 using System.ComponentModel;
 using System.Resources;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace SchoolManagerWPF.View.TabPages
+namespace SchoolManagerViewModel.View.TabPages
 {
     /// <summary>
     /// Interaction logic for Classes.xaml

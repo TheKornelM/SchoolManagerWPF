@@ -1,9 +1,8 @@
-﻿using SchoolManagerWPF.View;
-using SchoolManagerWPF.ViewModel;
+﻿using SchoolManagerViewModel.View;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace SchoolManagerWPF
+namespace SchoolManagerViewModel
 {
     /// <summary>
     /// Interaction logic for Login.xaml

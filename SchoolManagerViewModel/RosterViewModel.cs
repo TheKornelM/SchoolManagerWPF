@@ -1,10 +1,10 @@
-﻿using SchoolManagerModel.Entities;
+﻿using System.Collections.ObjectModel;
+using SchoolManagerModel.Entities;
 using SchoolManagerModel.Entities.UserModel;
 using SchoolManagerModel.Managers;
 using SchoolManagerModel.Persistence;
-using System.Collections.ObjectModel;
 
-namespace SchoolManagerWPF.ViewModel;
+namespace SchoolManagerViewModel;
 
 public class RosterViewModel : ViewModelBase
 {

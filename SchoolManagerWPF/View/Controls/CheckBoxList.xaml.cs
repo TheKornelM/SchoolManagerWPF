@@ -1,9 +1,8 @@
 ﻿using SchoolManagerModel.Entities;
-using SchoolManagerWPF.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace SchoolManagerWPF.View.Controls
+namespace SchoolManagerViewModel.View.Controls
 {
     public partial class CheckBoxList : UserControl
     {

@@ -1,7 +1,7 @@
 ﻿using SchoolManagerModel.Entities;
 using System.Windows.Data;
 
-namespace SchoolManagerWPF.Converters;
+namespace SchoolManagerViewModel.Converters;
 
 public class RoleToIntConverter : IValueConverter
 {

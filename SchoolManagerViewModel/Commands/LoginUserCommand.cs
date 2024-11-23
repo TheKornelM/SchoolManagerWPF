@@ -1,11 +1,11 @@
-﻿using SchoolManagerModel.Entities;
+﻿using System.Diagnostics;
+using System.Windows.Input;
+using SchoolManagerModel.Entities;
 using SchoolManagerModel.Entities.UserModel;
 using SchoolManagerModel.Managers;
 using SchoolManagerModel.Persistence;
-using System.Diagnostics;
-using System.Windows.Input;
 
-namespace SchoolManagerWPF.ViewModel.Commands;
+namespace SchoolManagerViewModel.Commands;
 
 public class LoginUserCommand : ICommand
 {

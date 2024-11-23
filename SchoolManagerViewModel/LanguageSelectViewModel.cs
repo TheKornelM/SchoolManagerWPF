@@ -1,6 +1,6 @@
-﻿using SchoolManagerWPF.ViewModel.Commands;
+﻿using SchoolManagerViewModel.Commands;
 
-namespace SchoolManagerWPF.ViewModel;
+namespace SchoolManagerViewModel;
 
 public class LanguageSelectViewModel : ViewModelBase
 {

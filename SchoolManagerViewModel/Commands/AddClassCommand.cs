@@ -1,11 +1,11 @@
-﻿using SchoolManagerModel.Entities;
+﻿using System.Windows.Input;
+using SchoolManagerModel.Entities;
 using SchoolManagerModel.Managers;
 using SchoolManagerModel.Persistence;
 using SchoolManagerModel.Validators;
-using SchoolManagerWPF.ViewModel.EntityViewModels;
-using System.Windows.Input;
+using SchoolManagerViewModel.EntityViewModels;
 
-namespace SchoolManagerWPF.ViewModel.Commands
+namespace SchoolManagerViewModel.Commands
 {
     public class AddClassCommand : ICommand
     {

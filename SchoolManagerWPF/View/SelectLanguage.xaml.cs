@@ -1,7 +1,6 @@
-﻿using SchoolManagerWPF.ViewModel;
-using System.Windows;
+﻿using System.Windows;
 
-namespace SchoolManagerWPF
+namespace SchoolManagerViewModel
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

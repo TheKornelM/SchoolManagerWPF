@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Data;
 
-namespace SchoolManagerWPF.Converters;
+namespace SchoolManagerViewModel.Converters;
 
 public class StringToVisibilityConverter : IValueConverter
 {

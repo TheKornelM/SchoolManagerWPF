@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace SchoolManagerWPF.ViewModel.EntityViewModels;
+namespace SchoolManagerViewModel.EntityViewModels;
 public class ClassViewModel : ViewModelBase, IDataErrorInfo
 {
     private int _id;

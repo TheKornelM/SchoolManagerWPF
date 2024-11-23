@@ -4,12 +4,11 @@ using SchoolManagerModel.Managers;
 using SchoolManagerModel.Persistence;
 using SchoolManagerModel.Utils;
 using SchoolManagerModel.Validators;
-using SchoolManagerWPF.ViewModel.Commands;
+using SchoolManagerViewModel.Commands;
 using System.Collections.ObjectModel;
 using System.Resources;
-using System.Windows;
 
-namespace SchoolManagerWPF.ViewModel;
+namespace SchoolManagerViewModel;
 
 public class AddUserViewModel : ViewModelBase
 {
@@ -217,7 +216,7 @@ public class AddUserViewModel : ViewModelBase
     #endregion
 
     #region Events
-    public void SelectChange(object sender, RoutedEventArgs e)
+    public void SelectChange(object sender, EventArgs e)
     {
         CheckAllSelected();
     }

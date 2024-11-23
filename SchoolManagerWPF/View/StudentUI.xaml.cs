@@ -1,7 +1,7 @@
 ﻿using SchoolManagerModel.Entities.UserModel;
 using System.Windows;
 
-namespace SchoolManagerWPF.View
+namespace SchoolManagerViewModel.View
 {
     /// <summary>
     /// Interaction logic for StudentUI.xaml

@@ -1,7 +1,7 @@
 ﻿using SchoolManagerModel.Persistence;
 using System.Windows;
 
-namespace SchoolManagerWPF
+namespace SchoolManagerViewModel
 {
     /// <summary>
     /// Interaction logic for App.xaml

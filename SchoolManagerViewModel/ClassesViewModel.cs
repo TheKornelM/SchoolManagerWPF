@@ -4,12 +4,12 @@ using SchoolManagerModel.Managers;
 using SchoolManagerModel.Persistence;
 using SchoolManagerModel.Utils;
 using SchoolManagerModel.Validators;
-using SchoolManagerWPF.ViewModel.Commands;
-using SchoolManagerWPF.ViewModel.EntityViewModels;
+using SchoolManagerViewModel.Commands;
+using SchoolManagerViewModel.EntityViewModels;
 using System.Collections.ObjectModel;
 using System.Resources;
 
-namespace SchoolManagerWPF.ViewModel;
+namespace SchoolManagerViewModel;
 
 public class ClassesViewModel : ViewModelBase
 {

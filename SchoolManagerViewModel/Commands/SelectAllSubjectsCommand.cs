@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace SchoolManagerWPF.ViewModel.Commands;
+namespace SchoolManagerViewModel.Commands;
 
 public class SelectAllSubjectsCommand : ICommand
 {

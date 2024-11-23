@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows.Input;
 
-namespace SchoolManagerWPF.ViewModel.Commands;
+namespace SchoolManagerViewModel.Commands;
 
 public class ShowLoginCommand : ICommand
 

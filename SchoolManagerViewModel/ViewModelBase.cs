@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace SchoolManagerWPF.ViewModel;
+namespace SchoolManagerViewModel;
 
 public class ViewModelBase : INotifyPropertyChanged
 {
