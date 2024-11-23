@@ -1,13 +1,13 @@
-﻿<Window x:Class="SchoolManagerViewModel.View.AdminUI"
+﻿<Window x:Class="SchoolManagerWPF.View.AdminUI"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SchoolManagerViewModel.View"
+        xmlns:local="clr-namespace:SchoolManagerWPF.View"
         xmlns:resx="clr-namespace:SchoolManagerModel.Resources;assembly=SchoolManagerModel"
-        xmlns:controls="clr-namespace:SchoolManagerViewModel.View.Controls"
-        xmlns:converters="clr-namespace:SchoolManagerViewModel.Converters"
-        xmlns:tabpages="clr-namespace:SchoolManagerViewModel.View.TabPages"
+        xmlns:controls="clr-namespace:SchoolManagerWPF.View.Controls"
+        xmlns:converters="clr-namespace:SchoolManagerWPF.Converters"
+        xmlns:tabpages="clr-namespace:SchoolManagerWPF.View.TabPages"
         mc:Ignorable="d"
         Title="AdminUI"
         Height="921"
@@ -25,7 +25,9 @@
             <TabItem Header="{x:Static resx:UI.Classes}">
                 <tabpages:Classes />
             </TabItem>
-            <TabItem Header="{x:Static resx:UI.AddSubject}" />
+            <TabItem Header="{x:Static resx:UI.AddSubject}">
+               <!-- <tabpages:Subjects />-->
+            </TabItem>
             <TabItem Header="{x:Static resx:UI.Roster}">
                 <tabpages:Roster />
             </TabItem>

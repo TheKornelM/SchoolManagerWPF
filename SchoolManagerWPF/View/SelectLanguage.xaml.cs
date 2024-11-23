@@ -1,26 +1,26 @@
-﻿using System.Windows;
+﻿using SchoolManagerViewModel;
+using System.Windows;
 
-namespace SchoolManagerViewModel
+namespace SchoolManagerWPF.View;
+
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class SelectLanguage : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class SelectLanguage : Window
+    public SelectLanguage()
     {
-        public SelectLanguage()
+        //Thread.CurrentThread.CurrentUICulture = new CultureInfo("hu-HU");
+        InitializeComponent();
+        Style = (Style)FindResource(typeof(Window));
+        var model = new LanguageSelectViewModel();
+        model.LoginShowAction = new Action(() =>
         {
-            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("hu-HU");
-            InitializeComponent();
-            Style = (Style)FindResource(typeof(Window));
-            var model = new LanguageSelectViewModel();
-            model.LoginShowAction = new Action(() =>
-            {
-                Login login = new Login();
-                login.Show();
-                this.Close();
-            });
-            this.DataContext = model;
-        }
-
+            Login login = new Login();
+            login.Show();
+            this.Close();
+        });
+        this.DataContext = model;
     }
+
 }

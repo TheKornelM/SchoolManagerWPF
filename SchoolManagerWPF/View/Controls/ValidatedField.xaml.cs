@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace SchoolManagerViewModel.View.Controls;
+namespace SchoolManagerWPF.View.Controls;
 
 public partial class ValidatedField : UserControl
 {

@@ -1,8 +1,9 @@
-﻿using System.ComponentModel;
+﻿using SchoolManagerViewModel;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace SchoolManagerViewModel.View.TabPages;
+namespace SchoolManagerWPF.View.TabPages;
 
 /// <summary>
 /// Interaction logic for Roster.xaml
