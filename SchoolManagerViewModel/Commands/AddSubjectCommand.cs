@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using SchoolManagerModel.Entities;
+using SchoolManagerModel.Managers;
+using SchoolManagerModel.Persistence;
 using System.Windows.Input;
 
 namespace SchoolManagerViewModel.Commands;
@@ -10,12 +12,31 @@ public class AddSubjectCommand : ICommand
 
     public bool CanExecute(object? parameter)
     {
-        return _addSubjectViewModel.SelectedClass != null && _addSubjectViewModel.SelectedTeacher != null;
+        return IsValidSubject();
     }
 
-    public void Execute(object? parameter)
+    public async void Execute(object? parameter)
     {
-        Debug.WriteLine("ok");
+        using var dbContext = new SchoolDbContext();
+        var subjectDatabase = new SubjectDatabase(dbContext);
+        var subjectManager = new SubjectManager(subjectDatabase);
+
+        try
+        {
+            var subject = new Subject()
+            {
+                Name = _addSubjectViewModel.SubjectName,
+                // Cannot be executed with zero by checking for executable
+                Class = _addSubjectViewModel.SelectedClass!,
+                Teacher = _addSubjectViewModel.SelectedTeacher!,
+            };
+            await subjectManager.AddSubjectAsync(subject);
+            _addSubjectViewModel.SuccessfulAdd?.Invoke();
+        }
+        catch (Exception ex)
+        {
+            _addSubjectViewModel.FailedAdd?.Invoke(ex.Message);
+        }
     }
 
     public void NotifyCanExecuteChanged()
@@ -26,5 +47,12 @@ public class AddSubjectCommand : ICommand
     public AddSubjectCommand(AddSubjectViewModel addSubjectViewModel)
     {
         _addSubjectViewModel = addSubjectViewModel;
+    }
+
+    private bool IsValidSubject()
+    {
+        return _addSubjectViewModel.SelectedClass != null &&
+            _addSubjectViewModel.SelectedTeacher != null &&
+            !string.IsNullOrEmpty(_addSubjectViewModel.SubjectName);
     }
 }

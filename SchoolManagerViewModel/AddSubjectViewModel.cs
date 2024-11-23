@@ -10,10 +10,11 @@ namespace SchoolManagerViewModel;
 public class AddSubjectViewModel : ViewModelBase
 {
     #region Private fields
-    private Class? _selectedClass;
+    private Class? _selectedClass = new Class() { };
     private Teacher? _selectedTeacher;
     private ObservableCollection<Class> _classes = new();
     private ObservableCollection<Teacher> _teachers = new();
+    private string _subjectName = string.Empty;
 
     #endregion
 
@@ -25,12 +26,8 @@ public class AddSubjectViewModel : ViewModelBase
         get => _selectedClass;
         set
         {
-            if (_selectedClass == value)
-            {
-                return;
-            }
-
             SetField(ref _selectedClass, value, nameof(SelectedClass));
+            AddSubjectCommand.NotifyCanExecuteChanged();
         }
     }
 
@@ -39,12 +36,8 @@ public class AddSubjectViewModel : ViewModelBase
         get => _selectedTeacher;
         set
         {
-            if (_selectedTeacher == value)
-            {
-                return;
-            }
-
             SetField(ref _selectedTeacher, value, nameof(SelectedTeacher));
+            AddSubjectCommand.NotifyCanExecuteChanged();
         }
     }
 
@@ -59,6 +52,19 @@ public class AddSubjectViewModel : ViewModelBase
         get => _teachers;
         private set => SetField(ref _teachers, value, nameof(Teachers));
     }
+
+    public string SubjectName
+    {
+        get => _subjectName;
+        set
+        {
+            SetField(ref _subjectName, value, nameof(SubjectName));
+            AddSubjectCommand.NotifyCanExecuteChanged();
+        }
+    }
+
+    public Action? SuccessfulAdd { get; set; }
+    public Action<string>? FailedAdd { get; set; }
     #endregion
 
     #region Constructors

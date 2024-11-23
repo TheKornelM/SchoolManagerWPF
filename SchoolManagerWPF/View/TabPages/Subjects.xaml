@@ -43,8 +43,8 @@
                   Grid.Row="4" />
         <Label Content="{x:Static resx:UI.SubjectName}"
                Grid.Row="6" />
-        <TextBox Grid.Row="7" />
-        <Button Content="{x:Static resx:UI.AddSubject}" Grid.Row="9"/>
+        <TextBox Grid.Row="7" Text="{Binding SubjectName}"/>
+        <Button Content="{x:Static resx:UI.AddSubject}" Command="{Binding AddSubjectCommand}" Grid.Row="9"/>
 
     </Grid>
 </UserControl>

@@ -1,4 +1,5 @@
-﻿using SchoolManagerViewModel;
+﻿using SchoolManagerModel.Utils;
+using SchoolManagerViewModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,7 +22,7 @@ namespace SchoolManagerWPF.View.TabPages
                 return;
             }
 
-            _viewModel = new AddSubjectViewModel();
+            _viewModel = CreateViewModel();
             this.Loaded += (s, e) => LoadSubjects();
             DataContext = _viewModel;
         }
@@ -32,6 +33,15 @@ namespace SchoolManagerWPF.View.TabPages
             var task2 = _viewModel.LoadTeachers();
 
             await Task.WhenAll(task1, task2);
+        }
+
+        private AddSubjectViewModel CreateViewModel()
+        {
+            var resourceManager = UIResourceFactory.GetNewResource();
+            var viewmodel = new AddSubjectViewModel();
+            viewmodel.SuccessfulAdd = new Action(() => MessageBox.Show(resourceManager.GetString("SuccessfullyAdded")));
+            viewmodel.FailedAdd = new Action<string>((string message) => MessageBox.Show(message));
+            return viewmodel;
         }
     }
 }
