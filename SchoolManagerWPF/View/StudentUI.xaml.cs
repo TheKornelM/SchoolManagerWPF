@@ -21,21 +21,21 @@ public partial class StudentUI : Window
     public async void GetViewModel2(Student student)
     {
         var viewmodel = new StudentMarksViewModel(student);
-        viewmodel.Marks = new ObservableCollection<Mark>(await GetMarksAsync(student));
+        viewmodel.Marks = new ObservableCollection<DetailedMarkViewModel>(await GetMarksAsync(student));
         StudentMarksControl.DataContext = viewmodel;
     }
 
     public async void SetViewModel(Student student)
     {
         var viewmodel = new StudentMarksViewModel(student);
-        viewmodel.Marks = new ObservableCollection<Mark>(await viewmodel.GetMarksAsync());
+        //viewmodel.Marks = new ObservableCollection<Mark>(await viewmodel.GetMarksAsync());
         StudentMarksControl.DataContext = viewmodel;
     }
 
-    public async Task<List<Mark>> GetMarksAsync(Student student)
+    public async Task<List<DetailedMarkViewModel>> GetMarksAsync(Student student)
     {
-        var marks = new List<Mark>();
-        marks.Add(new Mark()
+        var marks = new List<DetailedMarkViewModel>();
+        marks.Add(new DetailedMarkViewModel()
         {
             Grade = 5,
             Student = student,
@@ -47,6 +47,19 @@ public partial class StudentUI : Window
             },
             SubmitDate = DateTime.Today,
             Notes = "Test"
+        });
+        marks.Add(new DetailedMarkViewModel()
+        {
+            Grade = 1,
+            Student = student,
+            Subject = new Subject()
+            {
+                Class = student.Class,
+                Name = "Test",
+                Teacher = new Teacher() { User = student.User }
+            },
+            SubmitDate = DateTime.Today,
+            Notes = "Test2"
         });
 
         await Task.Delay(500);

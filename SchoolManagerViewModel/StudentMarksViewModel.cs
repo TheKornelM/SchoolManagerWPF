@@ -9,11 +9,11 @@ namespace SchoolManagerViewModel;
 public class StudentMarksViewModel(Student student) : ViewModelBase
 {
     #region Private fields
-    private ObservableCollection<Mark> _marks = [];
+    private ObservableCollection<DetailedMarkViewModel> _marks = [];
     #endregion
 
     #region Public properties
-    public ObservableCollection<Mark> Marks
+    public ObservableCollection<DetailedMarkViewModel> Marks
     {
         get => _marks;
         set => SetField(ref _marks, value, nameof(Marks));
