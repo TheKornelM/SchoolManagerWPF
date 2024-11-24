@@ -1,0 +1,127 @@
+﻿<UserControl x:Class="SchoolManagerWPF.View.TabPages.AddShowMarks"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SchoolManagerWPF.View.TabPages"
+             xmlns:resx="clr-namespace:SchoolManagerModel.Resources;assembly=SchoolManagerModel"
+             xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <!-- Define reusable spacing resources -->
+        <Thickness x:Key="StandardMargin"
+                   Left="20"
+                   Top="20"
+                   Right="20"
+                   Bottom="20" />
+        <Style x:Key="RowSpacingStyle"
+               TargetType="RowDefinition">
+            <Setter Property="Height"
+                    Value="20" />
+        </Style>
+        <Style x:Key="ColumnSpacingStyle"
+               TargetType="ColumnDefinition">
+            <Setter Property="Width"
+                    Value="20" />
+        </Style>
+        <Style x:Key="AutoRowStyle"
+               TargetType="RowDefinition">
+            <Setter Property="Height"
+                    Value="Auto" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Margin="{StaticResource StandardMargin}"
+          Background="#FFE5E5E5">
+        <Grid.RowDefinitions>
+            <RowDefinition Style="{StaticResource AutoRowStyle}" />
+            <RowDefinition Style="{StaticResource RowSpacingStyle}" />
+            <RowDefinition Style="{StaticResource AutoRowStyle}" />
+            <RowDefinition Style="{StaticResource AutoRowStyle}" />
+            <RowDefinition Style="{StaticResource RowSpacingStyle}" />
+            <RowDefinition Style="{StaticResource AutoRowStyle}" />
+            <RowDefinition Style="{StaticResource AutoRowStyle}" />
+            <RowDefinition Style="{StaticResource RowSpacingStyle}" />
+            <RowDefinition Style="{StaticResource AutoRowStyle}" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"
+                              MinWidth="250" />
+            <ColumnDefinition Style="{StaticResource ColumnSpacingStyle}" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Section -->
+        <Label Content="Select student"
+               FontWeight="Bold" />
+        <Label Content="{x:Static resx:UI.Subject}"
+               ContentStringFormat="{}{0}:"
+               Grid.Row="2" />
+        <ComboBox Grid.Row="3" />
+        <Label Content="{x:Static resx:UI.Student}"
+               ContentStringFormat="{}{0}:"
+               Grid.Row="5" />
+        <ComboBox Grid.Row="6" />
+
+        <!-- Right Section -->
+        <Grid Grid.Column="2"
+              Grid.RowSpan="7"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Style="{StaticResource AutoRowStyle}" />
+                <RowDefinition Style="{StaticResource RowSpacingStyle}" />
+                <RowDefinition Style="{StaticResource AutoRowStyle}" />
+                <RowDefinition Style="{StaticResource RowSpacingStyle}" />
+                <RowDefinition Style="{StaticResource AutoRowStyle}" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Style="{StaticResource ColumnSpacingStyle}" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Content="{x:Static resx:UI.AddMark}"
+                   Grid.ColumnSpan="5"
+                   FontWeight="Bold" />
+            <Label Grid.Row="2"
+                   Content="{x:Static resx:UI.Mark}"
+                   ContentStringFormat="{}{0}:" />
+            <ComboBox Grid.Row="2"
+                      Grid.Column="1"
+                      SelectedIndex="0">
+                <ComboBoxItem>1</ComboBoxItem>
+                <ComboBoxItem>2</ComboBoxItem>
+                <ComboBoxItem>3</ComboBoxItem>
+                <ComboBoxItem>4</ComboBoxItem>
+                <ComboBoxItem>5</ComboBoxItem>
+            </ComboBox>
+            <Label Content="{x:Static resx:UI.Notes}"
+                   Grid.Row="4"
+                   ContentStringFormat="{}{0}:" />
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          Name="scv"
+                          Grid.Row="5"
+                          Grid.ColumnSpan="3" HorizontalAlignment="Stretch" >
+                <TextBox TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Auto"
+                         AcceptsReturn="True"
+                         MaxHeight="{Binding ElementName=scv, Path=ActualHeight}" />
+            </ScrollViewer>
+
+            <Button Grid.Row="5"
+                    Grid.Column="5"
+                    Width="Auto" Padding="10px">
+                <TextBlock TextWrapping="Wrap"
+                           HorizontalAlignment="Center"
+                           Text="{x:Static resx:UI.AddMark}" />
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

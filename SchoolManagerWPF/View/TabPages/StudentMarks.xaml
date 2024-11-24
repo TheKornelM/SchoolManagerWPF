@@ -42,11 +42,8 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto" />
-                                    <!-- Mark Column -->
                                     <ColumnDefinition Width="*" />
-                                    <!-- Main Info Column -->
                                     <ColumnDefinition Width="Auto" />
-                                    <!-- Button Column -->
                                 </Grid.ColumnDefinitions>
 
                                 <!-- Mark Circle -->
@@ -113,7 +110,7 @@
                                     </Button.Command>
                                 </Button>
 
-                                <!-- Hidden Part -->
+                                <!-- Details, hidden part -->
                                 <Grid Grid.Row="1"
                                       Grid.ColumnSpan="3"
                                       Visibility="{Binding IsDetailsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"

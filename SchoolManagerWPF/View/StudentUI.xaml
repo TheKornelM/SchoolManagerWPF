@@ -13,9 +13,7 @@
     <Grid>
         <TabControl>
             <TabItem Header="{x:Static resx:UI.Marks}">
-                <Grid Background="#FFE5E5E5">
-                    <tabpages:StudentMarks x:Name="StudentMarksControl" />
-                </Grid>
+                <tabpages:StudentMarks x:Name="StudentMarksControl" />
             </TabItem>
         </TabControl>
     </Grid>
