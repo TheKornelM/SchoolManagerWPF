@@ -26,7 +26,7 @@
                 <tabpages:Classes />
             </TabItem>
             <TabItem Header="{x:Static resx:UI.AddSubject}">
-               <!-- <tabpages:Subjects />-->
+               <tabpages:Subjects />
             </TabItem>
             <TabItem Header="{x:Static resx:UI.Roster}">
                 <tabpages:Roster />
