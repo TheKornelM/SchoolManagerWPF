@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using SchoolManagerModel.Entities;
-using SchoolManagerModel.Managers;
-using SchoolManagerModel.Persistence;
 using SchoolManagerModel.Utils;
 using SchoolManagerModel.Validators;
 using SchoolManagerViewModel.Commands;
@@ -11,7 +9,7 @@ using System.Resources;
 
 namespace SchoolManagerViewModel;
 
-public class ClassesViewModel : ViewModelBase
+public class AdminClassesViewModel : ClassesViewModelBase
 {
     #region Private fields
     private ObservableCollection<ClassViewModel> _classes = [];
@@ -23,14 +21,6 @@ public class ClassesViewModel : ViewModelBase
     #endregion
 
     #region Public properties
-    public ObservableCollection<ClassViewModel> Classes
-    {
-        get => _classes;
-        set
-        {
-            SetField(ref _classes, value, nameof(Classes));
-        }
-    }
 
     public string Class
     {
@@ -73,7 +63,6 @@ public class ClassesViewModel : ViewModelBase
     }
 
     public ResourceManager ResourceManager { get; private set; }
-    public Mapper Mapper { get; private set; }
     public Action? SuccessfulClassAdd { get; set; }
     public Action<string>? FailedClassAdd { get; set; }
 
@@ -86,7 +75,7 @@ public class ClassesViewModel : ViewModelBase
     #endregion
 
     #region Constructor
-    public ClassesViewModel(ResourceManager resourceManager)
+    public AdminClassesViewModel(ResourceManager resourceManager)
     {
         ResourceManager = resourceManager;
         AddClassCommand = new AddClassCommand(this);
@@ -95,38 +84,12 @@ public class ClassesViewModel : ViewModelBase
             cfg.CreateMap<Class, ClassViewModel>();
             cfg.CreateMap<ClassViewModel, Class>();
         });
-        Mapper = new Mapper(mapperConfiguration);
 
-        GetClassesAsync();
     }
 
     #endregion
 
     #region Private methods
-    private async void GetClassesAsync()
-    {
-        var dbContext = new SchoolDbContext();
-        var classDatabase = new ClassDatabase(dbContext);
-        var classManager = new ClassManager(classDatabase);
-        var result = await classManager.GetClassesAsync();
-
-        var mapped = new ObservableCollection<ClassViewModel>();
-        foreach (var item in result)
-        {
-            mapped.Add(Mapper.Map<Class, ClassViewModel>(item));
-        }
-
-        _classes = mapped;
-        ResetChangedStatus();
-    }
-
-    private void ResetChangedStatus()
-    {
-        foreach (var item in _classes)
-        {
-            item.IsChanged = false;
-        }
-    }
 
     #endregion
 }

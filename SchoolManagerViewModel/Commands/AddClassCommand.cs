@@ -1,18 +1,18 @@
-﻿using System.Windows.Input;
-using SchoolManagerModel.Entities;
+﻿using SchoolManagerModel.Entities;
 using SchoolManagerModel.Managers;
 using SchoolManagerModel.Persistence;
 using SchoolManagerModel.Validators;
 using SchoolManagerViewModel.EntityViewModels;
+using System.Windows.Input;
 
 namespace SchoolManagerViewModel.Commands
 {
     public class AddClassCommand : ICommand
     {
-        private ClassesViewModel _classesViewModel { get; set; }
+        private AdminClassesViewModel _classesViewModel { get; set; }
         public event EventHandler? CanExecuteChanged;
 
-        public AddClassCommand(ClassesViewModel viewModel)
+        public AddClassCommand(AdminClassesViewModel viewModel)
         {
             _classesViewModel = viewModel;
         }
