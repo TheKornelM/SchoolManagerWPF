@@ -13,23 +13,35 @@
         <converters:RoleToIntConverter x:Key="RoleToIntConverter" />
         <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
         <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter" />
+
+        <!-- Shared Values -->
+        <Thickness x:Key="StandardMargin">15</Thickness>
+        <SolidColorBrush x:Key="PrimaryColor"
+                         Color="RoyalBlue" />
+        <SolidColorBrush x:Key="SecondaryTextColor"
+                         Color="Gray" />
+        <SolidColorBrush x:Key="WhiteColor"
+                         Color="White" />
+        <CornerRadius x:Key="BorderRadius">5</CornerRadius>
     </UserControl.Resources>
+
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel>
-            <ItemsControl ItemsSource="{Binding Marks}" >
+        <StackPanel Margin="{StaticResource StandardMargin}">
+            <ItemsControl ItemsSource="{Binding Marks}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="Gray"
+                        <Border BorderBrush="{StaticResource PrimaryColor}"
                                 BorderThickness="1"
-                                Margin="5"
-                                Padding="10">
+                                Margin="{StaticResource StandardMargin}"
+                                Padding="10"
+                                CornerRadius="{StaticResource BorderRadius}">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="auto" />
                                     <!-- Mark Column -->
                                     <ColumnDefinition Width="*" />
                                     <!-- Main Info Column -->
@@ -38,44 +50,75 @@
                                 </Grid.ColumnDefinitions>
 
                                 <!-- Mark Circle -->
-                                <!-- Mark Circle -->
                                 <Grid Grid.RowSpan="1"
-                                      Grid.Column="0">
-                                    <Ellipse Width="40"
-                                             Height="40"
-                                             Fill="LightBlue"
-                                             VerticalAlignment="Top" />
+                                      Grid.Column="0"
+                                      Margin="{StaticResource StandardMargin}"
+                                      VerticalAlignment="Stretch"
+                                      HorizontalAlignment="Stretch">
+                                    <Ellipse Width="55"
+                                             Height="55"
+                                             Fill="{StaticResource PrimaryColor}" />
                                     <TextBlock Text="{Binding Grade}"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"
                                                FontWeight="Bold"
-                                               Foreground="White" />
+                                               Foreground="{StaticResource WhiteColor}" />
                                 </Grid>
 
                                 <!-- Subject and Teacher -->
                                 <StackPanel Grid.Column="1"
-                                            Grid.Row="0">
+                                            Grid.Row="0"
+                                            Margin="{StaticResource StandardMargin}">
                                     <TextBlock Text="{Binding Subject.Name}"
-                                               FontWeight="Bold" />
+                                               FontWeight="Bold"
+                                               Foreground="{StaticResource PrimaryColor}" />
                                     <TextBlock Text="{Binding Subject.Teacher.User.Name}"
-                                               Foreground="Gray" />
+                                               Foreground="Black" />
                                     <TextBlock Text="{Binding SubmitDate, StringFormat='{}{0:MM/dd/yyyy}'}"
-                                               Foreground="Gray" />
+                                               Foreground="{StaticResource SecondaryTextColor}" />
                                 </StackPanel>
 
                                 <!-- Details Button -->
                                 <Button Grid.Column="2"
-                                        Content="▼"
-                                        Command="{Binding ToggleDetailsCommand}"
-                                        VerticalAlignment="Top"
-                                        Width="30"
-                                        Height="30"
-                                        ToolTip="Show Details" />
+                                        VerticalAlignment="Center"
+                                        Width="55"
+                                        Height="55"
+                                        ToolTip="Show Details"
+                                        BorderThickness="0"
+                                        Background="{StaticResource PrimaryColor}"
+                                        Foreground="{StaticResource WhiteColor}"
+                                        Margin="{StaticResource StandardMargin}">
+
+                                    <Button.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius"
+                                                    Value="{StaticResource BorderRadius}" />
+                                        </Style>
+                                    </Button.Resources>
+                                    <Button.Style>
+
+                                        <Style TargetType="Button">
+                                            <Setter Property="Content"
+                                                    Value="▼" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsDetailsVisible}"
+                                                             Value="True">
+                                                    <Setter Property="Content"
+                                                            Value="▲" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                    <Button.Command>
+                                        <Binding Path="ToggleDetailsCommand" />
+                                    </Button.Command>
+                                </Button>
 
                                 <!-- Hidden Part -->
                                 <Grid Grid.Row="1"
                                       Grid.ColumnSpan="3"
-                                      Visibility="{Binding IsDetailsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                      Visibility="{Binding IsDetailsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                      Margin="{StaticResource StandardMargin}">
                                     <TextBlock Text="{Binding Notes}"
                                                TextWrapping="Wrap"
                                                Margin="10" />
