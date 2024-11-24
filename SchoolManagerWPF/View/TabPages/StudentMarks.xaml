@@ -96,7 +96,6 @@
                                         </Style>
                                     </Button.Resources>
                                     <Button.Style>
-
                                         <Style TargetType="Button">
                                             <Setter Property="Content"
                                                     Value="▼" />
@@ -120,8 +119,7 @@
                                       Visibility="{Binding IsDetailsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                                       Margin="{StaticResource StandardMargin}">
                                     <TextBlock Text="{Binding Notes}"
-                                               TextWrapping="Wrap"
-                                               Margin="10" />
+                                               TextWrapping="Wrap" />
                                 </Grid>
                             </Grid>
                         </Border>
