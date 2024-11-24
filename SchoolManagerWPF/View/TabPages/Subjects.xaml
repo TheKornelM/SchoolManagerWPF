@@ -17,7 +17,7 @@
         <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter" />
     </UserControl.Resources>
     <Grid Background="#FFE5E5E5"
-          Name="ClassesGrid"
+          Name="SubjectsGrid"
           Margin="30,30,30,30">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -32,19 +32,26 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Label Content="{x:Static resx:UI.Class}"
-               ContentStringFormat="{}{0}:" Grid.Row="0"/>
+               ContentStringFormat="{}{0}:"
+               Grid.Row="0" />
         <ComboBox ItemsSource="{Binding Classes}"
-                  SelectedItem="{Binding SelectedClass}" DisplayMemberPath="Name" Grid.Row="1" />
+                  SelectedItem="{Binding SelectedClass}"
+                  DisplayMemberPath="Name"
+                  Grid.Row="1" />
         <Label Content="{x:Static resx:UI.Teacher}"
-               ContentStringFormat="{}{0}:" Grid.Row="3"/>
+               ContentStringFormat="{}{0}:"
+               Grid.Row="3" />
         <ComboBox ItemsSource="{Binding Teachers}"
                   SelectedItem="{Binding SelectedTeacher}"
                   DisplayMemberPath="User.Name"
                   Grid.Row="4" />
         <Label Content="{x:Static resx:UI.SubjectName}"
                Grid.Row="6" />
-        <TextBox Grid.Row="7" Text="{Binding SubjectName}"/>
-        <Button Content="{x:Static resx:UI.AddSubject}" Command="{Binding AddSubjectCommand}" Grid.Row="9"/>
+        <TextBox Grid.Row="7"
+                 Text="{Binding SubjectName}" />
+        <Button Content="{x:Static resx:UI.AddSubject}"
+                Command="{Binding AddSubjectCommand}"
+                Grid.Row="9" />
 
     </Grid>
 </UserControl>

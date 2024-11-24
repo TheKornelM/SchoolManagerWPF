@@ -10,7 +10,7 @@ namespace SchoolManagerViewModel;
 public class AddSubjectViewModel : ViewModelBase
 {
     #region Private fields
-    private Class? _selectedClass = new Class() { };
+    private Class? _selectedClass;
     private Teacher? _selectedTeacher;
     private ObservableCollection<Class> _classes = new();
     private ObservableCollection<Teacher> _teachers = new();

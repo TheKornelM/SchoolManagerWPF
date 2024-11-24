@@ -31,6 +31,7 @@ public class AddSubjectCommand : ICommand
                 Teacher = _addSubjectViewModel.SelectedTeacher!,
             };
             await subjectManager.AddSubjectAsync(subject);
+            _addSubjectViewModel.SubjectName = string.Empty;
             _addSubjectViewModel.SuccessfulAdd?.Invoke();
         }
         catch (Exception ex)

@@ -11,7 +11,7 @@ namespace SchoolManagerWPF.View.TabPages
     /// </summary>
     public partial class Subjects : UserControl
     {
-        private AddSubjectViewModel _viewModel;
+        private AddSubjectViewModel _viewModel = new();
         public Subjects()
         {
             InitializeComponent();
@@ -23,11 +23,11 @@ namespace SchoolManagerWPF.View.TabPages
             }
 
             _viewModel = CreateViewModel();
-            this.Loaded += (s, e) => LoadSubjects();
+            LoadViewModelData();
             DataContext = _viewModel;
         }
 
-        private async void LoadSubjects()
+        private async void LoadViewModelData()
         {
             var task1 = _viewModel.LoadClasses();
             var task2 = _viewModel.LoadTeachers();
