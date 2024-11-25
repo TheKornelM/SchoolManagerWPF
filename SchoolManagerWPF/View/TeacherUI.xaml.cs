@@ -1,4 +1,5 @@
 ﻿using SchoolManagerModel.Entities.UserModel;
+using SchoolManagerViewModel;
 using System.Windows;
 
 namespace SchoolManagerWPF.View
@@ -12,7 +13,16 @@ namespace SchoolManagerWPF.View
         {
             InitializeComponent();
             Style = (Style)FindResource(typeof(Window));
+            SetViewModel(teacher);
+        }
 
+        public async void SetViewModel(Teacher teacher)
+        {
+            var viewmodel = new AddShowMarksViewModel(teacher);
+            await viewmodel.LoadSubjectsAsync();
+            viewmodel.SuccessfulAdd = ((string message) => MessageBox.Show(message));
+            viewmodel.FailedAdd = ((string message) => MessageBox.Show(message));
+            AddShowMarksControl.DataContext = viewmodel;
         }
     }
 }

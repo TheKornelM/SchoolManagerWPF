@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SchoolManagerWPF.View.TabPages"
              xmlns:resx="clr-namespace:SchoolManagerModel.Resources;assembly=SchoolManagerModel"
-             xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800">
@@ -22,16 +21,12 @@
             <Setter Property="Height"
                     Value="20" />
         </Style>
-        <Style x:Key="ColumnSpacingStyle"
-               TargetType="ColumnDefinition">
-            <Setter Property="Width"
-                    Value="20" />
-        </Style>
         <Style x:Key="AutoRowStyle"
                TargetType="RowDefinition">
             <Setter Property="Height"
                     Value="Auto" />
         </Style>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
 
     <Grid Margin="{StaticResource StandardMargin}"
@@ -50,27 +45,38 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"
                               MinWidth="250" />
-            <ColumnDefinition Style="{StaticResource ColumnSpacingStyle}" />
+            <ColumnDefinition Width="20" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <Label Content="Select student and subject" FontWeight="Bold"/>
 
-        <!-- Select subject and student -->
-        <Label Content="Select student"
-               FontWeight="Bold" />
+        <!-- Select Subject -->
         <Label Content="{x:Static resx:UI.Subject}"
-               ContentStringFormat="{}{0}:"
+
                Grid.Row="2" />
-        <ComboBox Grid.Row="3" />
+        <ComboBox Grid.Row="3"
+                  ItemsSource="{Binding Subjects}"
+                  SelectedItem="{Binding Mark.Subject, Mode=TwoWay}"
+                  DisplayMemberPath="Name"
+                  IsSynchronizedWithCurrentItem="True" />
+
+        <!-- Select Student -->
         <Label Content="{x:Static resx:UI.Student}"
-               ContentStringFormat="{}{0}:"
-               Grid.Row="5" />
-        <ComboBox Grid.Row="6" />
+               Grid.Row="5"
+               Visibility="{Binding IsSubjectSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <ComboBox Grid.Row="6"
+                  ItemsSource="{Binding Students}"
+                  SelectedItem="{Binding Mark.Student, Mode=TwoWay}"
+                  DisplayMemberPath="User.Name"
+                  IsSynchronizedWithCurrentItem="True"
+                  Visibility="{Binding IsSubjectSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
         <!-- Add Mark -->
         <Grid Grid.Column="2"
               Grid.RowSpan="7"
               HorizontalAlignment="Stretch"
-              VerticalAlignment="Stretch">
+              VerticalAlignment="Stretch"
+              Visibility="{Binding IsStudentSelected, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Style="{StaticResource AutoRowStyle}" />
                 <RowDefinition Style="{StaticResource RowSpacingStyle}" />
@@ -83,7 +89,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Style="{StaticResource ColumnSpacingStyle}" />
+                <ColumnDefinition Width="20" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
@@ -95,29 +101,27 @@
                    ContentStringFormat="{}{0}:" />
             <ComboBox Grid.Row="2"
                       Grid.Column="1"
-                      SelectedIndex="0">
-                <ComboBoxItem>1</ComboBoxItem>
-                <ComboBoxItem>2</ComboBoxItem>
-                <ComboBoxItem>3</ComboBoxItem>
-                <ComboBoxItem>4</ComboBoxItem>
-                <ComboBoxItem>5</ComboBoxItem>
-            </ComboBox>
+                      ItemsSource="{Binding Grades}"
+                      SelectedItem="{Binding Mark.Grade, Mode=TwoWay}" />
             <Label Content="{x:Static resx:UI.Notes}"
                    Grid.Row="4"
                    ContentStringFormat="{}{0}:" />
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                           Name="scv"
                           Grid.Row="5"
-                          Grid.ColumnSpan="3" HorizontalAlignment="Stretch" >
+                          Grid.ColumnSpan="3"
+                          HorizontalAlignment="Stretch">
                 <TextBox TextWrapping="Wrap"
                          VerticalScrollBarVisibility="Auto"
                          AcceptsReturn="True"
-                         MaxHeight="{Binding ElementName=scv, Path=ActualHeight}" />
+                         Text="{Binding Mark.Notes, Mode=TwoWay}" />
             </ScrollViewer>
 
             <Button Grid.Row="5"
-                    Grid.Column="5"
-                    Width="Auto" Padding="10px">
+                    Grid.Column="4"
+                    Width="Auto"
+                    Padding="10"
+                    Command="{Binding AddMarkCommand}">
                 <TextBlock TextWrapping="Wrap"
                            HorizontalAlignment="Center"
                            Text="{x:Static resx:UI.AddMark}" />

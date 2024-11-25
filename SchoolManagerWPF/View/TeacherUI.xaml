@@ -13,7 +13,7 @@
     <Grid>
         <TabControl Background="#FFE5E5E5">
             <TabItem Header="{x:Static resx:UI.Marks}">
-                <tabpages:AddShowMarks />
+                <tabpages:AddShowMarks x:Name="AddShowMarksControl" />
             </TabItem>
         </TabControl>
 

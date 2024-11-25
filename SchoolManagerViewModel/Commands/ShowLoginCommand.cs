@@ -28,6 +28,7 @@ public class ShowLoginCommand : ICommand
 
         string lang = GetLanguageCode();
         Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+        Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
 
         if (_languageSelectViewModel.LoginShowAction != null)
         {
