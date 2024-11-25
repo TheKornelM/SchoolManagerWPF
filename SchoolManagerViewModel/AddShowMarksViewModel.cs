@@ -86,20 +86,6 @@ public class AddShowMarksViewModel : ViewModelBase
         var teacherManager = new TeacherManager(teacherDatabase);
 
         var result = await teacherManager.GetCurrentTaughtSubjectsAsync(_teacher);
-        result.Add(new Subject()
-        {
-            Class = new Class(12, 'D'),
-            Name = "ok",
-            Teacher = new Teacher() { User = _teacher.User }
-        });
-        result.Add(new Subject()
-        {
-            Class = new Class(12, 'D'),
-            Name = "ok2",
-            Teacher = new Teacher() { User = _teacher.User }
-        });
-
-
         Subjects = new ObservableCollection<Subject>(result);
         Mark.Subject = Subjects.FirstOrDefault();
     }
@@ -114,7 +100,6 @@ public class AddShowMarksViewModel : ViewModelBase
 
         SetField(ref _students, new ObservableCollection<Student>(result), nameof(Students));
         Mark.Student = Students.FirstOrDefault();
-        Debug.WriteLine(Mark.Student?.User.Name);
     }
 
     #endregion
@@ -129,19 +114,27 @@ public class AddShowMarksViewModel : ViewModelBase
         var resourceManager = UIResourceFactory.GetNewResource();
         try
         {
+            if (Mark.Student == null || Mark.Subject == null)
+            {
+                var errorMessage = UIResourceFactory
+                    .GetNewResource().GetString("UnexpectedError") ?? "Unexpected error happened";
+                FailedAdd?.Invoke(errorMessage);
+                return;
+            }
+
             await subjectsManager.AddSubjectMarkAsync(new Mark()
             {
                 Student = Mark.Student,
                 Subject = Mark.Subject,
                 Grade = Mark.Grade,
                 Notes = Mark.Notes,
-                SubmitDate = DateTime.Today
+                SubmitDate = DateTime.Now
             });
             SuccessfulAdd?.Invoke(resourceManager.GetString("SuccessfullyAdded") ?? "Added successfully");
         }
         catch (Exception ex)
         {
-            this.FailedAdd?.Invoke(ex.Message);
+            FailedAdd?.Invoke(ex.Message);
         }
 
     }
