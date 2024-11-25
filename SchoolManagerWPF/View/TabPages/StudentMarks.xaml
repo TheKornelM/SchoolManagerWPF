@@ -25,7 +25,8 @@
         <CornerRadius x:Key="BorderRadius">5</CornerRadius>
     </UserControl.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  Background="#FFE5E5E5">
         <StackPanel Margin="{StaticResource StandardMargin}">
             <ItemsControl ItemsSource="{Binding Marks}">
                 <ItemsControl.ItemTemplate>

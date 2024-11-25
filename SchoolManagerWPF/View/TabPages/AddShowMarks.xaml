@@ -48,7 +48,7 @@
             <ColumnDefinition Width="20" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Label Content="Select student and subject" FontWeight="Bold"/>
+        <Label Content="{x:Static resx:UI.SubjectAndStudent}" FontWeight="Bold"/>
 
         <!-- Select Subject -->
         <Label Content="{x:Static resx:UI.Subject}"
