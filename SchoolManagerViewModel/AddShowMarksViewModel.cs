@@ -19,14 +19,29 @@ public class AddShowMarksViewModel : ViewModelBase
     private Teacher _teacher;
     private ObservableCollection<Subject> _subjects = [];
     private ObservableCollection<Student> _students = [];
+    private ObservableCollection<Mark> _studentSubjectMarks = [];
+
     #endregion
 
     #region Public Properties
-    public ObservableCollection<Subject> Subjects { get => _subjects; set => SetField(ref _subjects, value, nameof(Subjects)); }
-    public ObservableCollection<Student> Students { get => _students; set => SetField(ref _students, value, nameof(Students)); }
+    public ObservableCollection<Subject> Subjects
+    {
+        get => _subjects;
+        set => SetField(ref _subjects, value, nameof(Subjects));
+    }
+    public ObservableCollection<Student> Students
+    {
+        get => _students;
+        set => SetField(ref _students, value, nameof(Students));
+    }
     public MarkViewModel Mark { get; set; } = new();
     public Action<string>? SuccessfulAdd { get; set; }
     public Action<string>? FailedAdd { get; set; }
+    public ObservableCollection<Mark> StudentSubjectMarks
+    {
+        get => _studentSubjectMarks;
+        set => SetField(ref _studentSubjectMarks, value, nameof(StudentSubjectMarks));
+    }
 
     public bool IsSubjectSelected
     {
@@ -63,17 +78,27 @@ public class AddShowMarksViewModel : ViewModelBase
         _teacher = teacher;
         AddMarkCommand = new RelayCommand(AddMark, CanAddMark);
         Mark.Grade = 1;
-        Mark.PropertyChanged += (_, e) =>
+        Mark.PropertyChanged += async (_, e) =>
         {
             Debug.WriteLine("Changed property: " + e.PropertyName);
             if (e.PropertyName == nameof(Mark.Subject))
             {
                 IsSubjectSelected = Mark.Subject != null;
-                LoadStudentsAsync();
+                await LoadStudentsAsync();
             }
 
             if (e.PropertyName == nameof(Mark.Student))
+            {
                 IsStudentSelected = Mark.Student != null;
+
+                if (Mark.Student == null || Mark.Subject == null)
+                {
+                    StudentSubjectMarks = [];
+                    return;
+                }
+
+                await LoadMarksAsync(Mark.Student, Mark.Subject);
+            }
         };
     }
     #endregion
@@ -90,21 +115,33 @@ public class AddShowMarksViewModel : ViewModelBase
         Mark.Subject = Subjects.FirstOrDefault();
     }
 
-    private async void LoadStudentsAsync()
+    #endregion
+
+    #region Private methods
+
+    private async Task LoadStudentsAsync()
     {
         using var dbContext = new SchoolDbContext();
         var subjectsDatabase = new SubjectDatabase(dbContext);
         var subjectsManager = new SubjectManager(subjectsDatabase);
 
-        var result = await subjectsManager.GetSubjectStudentsAsync(Mark.Subject ?? throw new NullReferenceException());
+        var result = await subjectsManager.GetSubjectStudentsAsync(Mark.Subject
+            ?? throw new NullReferenceException());
 
         SetField(ref _students, new ObservableCollection<Student>(result), nameof(Students));
         Mark.Student = Students.FirstOrDefault();
     }
 
-    #endregion
+    private async Task LoadMarksAsync(Student student, Subject subject)
+    {
+        using var dbContext = new SchoolDbContext();
+        var subjectDatabase = new SubjectDatabase(dbContext);
+        var subjectsManager = new SubjectManager(subjectDatabase);
 
-    #region Private methods
+        var result = await subjectsManager.GetStudentSubjectMarksAsync(student, subject);
+        SetField(ref _studentSubjectMarks, new ObservableCollection<Mark>(result), nameof(StudentSubjectMarks));
+    }
+
     private async void AddMark()
     {
         using var dbContext = new SchoolDbContext();
@@ -117,7 +154,8 @@ public class AddShowMarksViewModel : ViewModelBase
             if (Mark.Student == null || Mark.Subject == null)
             {
                 var errorMessage = UIResourceFactory
-                    .GetNewResource().GetString("UnexpectedError") ?? "Unexpected error happened";
+                    .GetNewResource().GetString("UnexpectedError")
+                    ?? "Unexpected error happened";
                 FailedAdd?.Invoke(errorMessage);
                 return;
             }
@@ -130,7 +168,10 @@ public class AddShowMarksViewModel : ViewModelBase
                 Notes = Mark.Notes,
                 SubmitDate = DateTime.Now
             });
-            SuccessfulAdd?.Invoke(resourceManager.GetString("SuccessfullyAdded") ?? "Added successfully");
+
+            await LoadMarksAsync(Mark.Student, Mark.Subject);
+            SuccessfulAdd?.Invoke(resourceManager.GetString("SuccessfullyAdded")
+                ?? "Added successfully");
         }
         catch (Exception ex)
         {
