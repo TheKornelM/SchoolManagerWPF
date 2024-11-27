@@ -28,7 +28,7 @@ namespace SchoolManagerWPF.View.TabPages
 
         private AddUserViewModel getNewUserViewModel(ResourceManager resourceManager)
         {
-            var vm = new AddUserViewModel(resourceManager);
+            var vm = new AddUserViewModel();
             vm.SuccessfulUserAdd = new Action(() =>
             {
                 PasswordField.Password = string.Empty;

@@ -40,39 +40,39 @@
                 </Grid.RowDefinitions>
                 <!-- Username Field -->
                 <controls:ValidatedField LabelContent="{x:Static resx:UI.Username}"
-                                         FieldValue="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                         ValidationError="{Binding UsernameValidatorErrors}"
+                                         FieldValue="{Binding User.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         ValidationError="{Binding User.UsernameValidatorErrors}"
                                          Grid.Row="0" />
 
                 <!-- First Name Field -->
                 <controls:ValidatedField LabelContent="{x:Static resx:UI.FirstName}"
-                                         FieldValue="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                         ValidationError="{Binding FirstNameValidatorErrors}"
+                                         FieldValue="{Binding User.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         ValidationError="{Binding User.FirstNameValidatorErrors}"
                                          Grid.Row="1" />
 
                 <!-- Last Name Field -->
                 <controls:ValidatedField LabelContent="{x:Static resx:UI.LastName}"
-                                         FieldValue="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                         ValidationError="{Binding LastNameValidatorErrors}"
+                                         FieldValue="{Binding User.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         ValidationError="{Binding User.LastNameValidatorErrors}"
                                          Grid.Row="2" />
 
                 <controls:ValidatedPasswordField LabelContent="{x:Static resx:UI.Password}"
-                                                 Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                 ValidationError="{Binding PasswordValidatorErrors}"
+                                                 Password="{Binding User.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 ValidationError="{Binding User.PasswordValidatorErrors}"
                                                  Grid.Row="3"
                                                  ResetPassword="{Binding ResetPassword}"
                                                  x:Name="PasswordField" />
 
                 <controls:ValidatedPasswordField LabelContent="{x:Static resx:UI.ConfirmPassword}"
-                                                 Password="{Binding ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                 ValidationError="{Binding ConfirmPasswordValidatorErrors}"
+                                                 Password="{Binding User.ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 ValidationError="{Binding User.ConfirmPasswordValidatorErrors}"
                                                  ResetPassword="{Binding ResetPassword}"
                                                  Grid.Row="4"
                                                  x:Name="ConfirmPasswordField" />
 
                 <controls:ValidatedField LabelContent="{x:Static resx:UI.EmailAddress}"
-                                         FieldValue="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                         ValidationError="{Binding EmailValidatorErrors}"
+                                         FieldValue="{Binding User.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         ValidationError="{Binding User.EmailValidatorErrors}"
                                          Grid.Row="5" />
 
                 <Label Grid.Row="6"
