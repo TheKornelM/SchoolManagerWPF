@@ -41,7 +41,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SchoolManagerWPF.View.TabPages.Subjects">
-    <Position X="7.75" Y="7.5" Width="3" />
+    <Position X="6.75" Y="8.5" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEAAAAAAQAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>View\TabPages\Subjects.xaml.cs</FileName>
@@ -49,7 +49,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SchoolManagerWPF.View.TabPages.StudentMarks">
-    <Position X="5.25" Y="7.5" Width="1.5" />
+    <Position X="4.75" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>View\TabPages\StudentMarks.xaml.cs</FileName>
@@ -57,23 +57,15 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SchoolManagerWPF.View.TabPages.Roster">
-    <Position X="2.75" Y="6.75" Width="1.5" />
+    <Position X="2.75" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>View\TabPages\Roster.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="SchoolManagerWPF.View.TabPages.Classes">
-    <Position X="9.75" Y="9.75" Width="5.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
-      <FileName>View\TabPages\Classes.xaml.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
   <Class Name="SchoolManagerWPF.View.TabPages.AddUser">
-    <Position X="2.5" Y="10" Width="5.25" />
+    <Position X="16.5" Y="8.75" Width="5.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>View\TabPages\AddUser.xaml.cs</FileName>
@@ -85,6 +77,26 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>View\TabPages\AddShowMarks.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Windows.Controls.UserControl" Collapsed="true">
+    <Position X="7.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SchoolManagerWPF.View.TabPages.Classes">
+    <Position X="10.25" Y="8.75" Width="5.75" />
+    <InheritanceLine Type="System.Windows.Controls.UserControl" ManuallyRouted="true">
+      <Path>
+        <Point X="8.25" Y="6.941" />
+        <Point X="8.25" Y="8.114" />
+        <Point X="13.125" Y="8.114" />
+        <Point X="13.125" Y="8.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>View\TabPages\Classes.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
