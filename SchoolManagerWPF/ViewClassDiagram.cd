@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="SchoolManagerWPF.View.TeacherUI">
-    <Position X="2" Y="5.25" Width="2.75" />
+    <Position X="2" Y="6.5" Width="2.75" />
     <InheritanceLine Type="System.Windows.Window" ManuallyRouted="true">
       <Path>
-        <Point X="12" Y="3.941" />
-        <Point X="12" Y="4.465" />
-        <Point X="3.375" Y="4.465" />
-        <Point X="3.375" Y="5.25" />
+        <Point X="12" Y="5.191" />
+        <Point X="12" Y="5.729" />
+        <Point X="3.375" Y="5.729" />
+        <Point X="3.375" Y="6.5" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -17,13 +17,13 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SchoolManagerWPF.View.StudentUI">
-    <Position X="5.5" Y="5.25" Width="2.75" />
+    <Position X="5.5" Y="6.5" Width="2.75" />
     <InheritanceLine Type="System.Windows.Window" ManuallyRouted="true">
       <Path>
-        <Point X="12" Y="3.941" />
-        <Point X="12" Y="4.474" />
-        <Point X="6.875" Y="4.474" />
-        <Point X="6.875" Y="5.25" />
+        <Point X="12" Y="5.191" />
+        <Point X="12" Y="5.724" />
+        <Point X="6.875" Y="5.724" />
+        <Point X="6.875" Y="6.5" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -33,13 +33,13 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SchoolManagerWPF.View.SelectLanguage">
-    <Position X="8.75" Y="5.25" Width="1.5" />
+    <Position X="8.75" Y="6.5" Width="1.5" />
     <InheritanceLine Type="System.Windows.Window" ManuallyRouted="true">
       <Path>
-        <Point X="12" Y="3.941" />
-        <Point X="12" Y="4.473" />
-        <Point X="9.5" Y="4.473" />
-        <Point X="9.5" Y="5.25" />
+        <Point X="12" Y="5.191" />
+        <Point X="12" Y="5.723" />
+        <Point X="9.5" Y="5.723" />
+        <Point X="9.5" Y="6.5" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -49,13 +49,13 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SchoolManagerWPF.View.AdminUI">
-    <Position X="11" Y="5.25" Width="2" />
+    <Position X="11" Y="6.5" Width="2" />
     <InheritanceLine Type="System.Windows.Window" ManuallyRouted="true">
       <Path>
-        <Point X="12" Y="3.941" />
-        <Point X="12" Y="4.264" />
-        <Point X="12" Y="4.264" />
-        <Point X="12" Y="5.25" />
+        <Point X="12" Y="5.191" />
+        <Point X="12" Y="5.514" />
+        <Point X="12" Y="5.514" />
+        <Point X="12" Y="6.5" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -133,17 +133,17 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="System.Windows.Window" Collapsed="true">
-    <Position X="11.25" Y="3.25" Width="1.5" />
+    <Position X="11.25" Y="4.5" Width="1.5" />
     <TypeIdentifier />
   </Class>
   <Class Name="SchoolManagerWPF.View.Login">
-    <Position X="13.75" Y="5.25" Width="4.75" />
+    <Position X="13.75" Y="6.5" Width="4.75" />
     <InheritanceLine Type="System.Windows.Window" ManuallyRouted="true">
       <Path>
-        <Point X="12" Y="3.941" />
-        <Point X="12" Y="4.47" />
-        <Point X="16.125" Y="4.47" />
-        <Point X="16.125" Y="5.25" />
+        <Point X="12" Y="5.191" />
+        <Point X="12" Y="5.72" />
+        <Point X="16.125" Y="5.72" />
+        <Point X="16.125" Y="6.5" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
