@@ -51,28 +51,36 @@
                    Grid.ColumnSpan="3"
                    FontWeight="Bold" />
             <Label Content="{x:Static resx:UI.Username}"
+                   ContentStringFormat="{}{0}:"
                    Grid.Row="1" />
             <TextBox HorizontalAlignment="Stretch"
+                     Text="{Binding UsernameFilter}"
                      Grid.Row="1"
                      Grid.Column="1"
-                     VerticalAlignment="Center"/>
+                     VerticalAlignment="Center" />
             <Label Content="{x:Static resx:UI.EmailAddress}"
+                   ContentStringFormat="{}{0}:"
                    Grid.Row="1"
                    Grid.Column="3" />
             <TextBox HorizontalAlignment="Stretch"
+                     Text="{Binding EmailFilter}"
                      Grid.Row="1"
                      Grid.Column="4"
-                     VerticalAlignment="Center"/>
+                     VerticalAlignment="Center" />
             <Label Content="{x:Static resx:UI.FirstName}"
+                   ContentStringFormat="{}{0}:"
                    Grid.Row="3" />
             <TextBox HorizontalAlignment="Stretch"
+                     Text="{Binding FirstNameFilter}"
                      Grid.Row="3"
                      Grid.Column="1"
                      VerticalAlignment="Center" />
             <Label Content="{x:Static resx:UI.LastName}"
+                   ContentStringFormat="{}{0}:"
                    Grid.Row="3"
                    Grid.Column="3" />
             <TextBox HorizontalAlignment="Stretch"
+                     Text="{Binding LastNameFilter}"
                      Grid.Row="3"
                      Grid.Column="4"
                      VerticalAlignment="Center" />
@@ -81,15 +89,27 @@
                     Grid.Row="5"
                     Grid.ColumnSpan="5"
                     HorizontalAlignment="Left"
-                    Padding="{StaticResource StandardPadding}"
-                    />
+                    Padding="{StaticResource StandardPadding}" />
             <!-- Show users -->
             <Label Content="{x:Static resx:UI.Users}"
                    Grid.Row="7"
                    FontWeight="Bold" />
             <DataGrid Grid.Row="8"
-                      Grid.ColumnSpan="5"
-                      VerticalAlignment="Stretch" />
+                      Grid.ColumnSpan="6"
+                      VerticalAlignment="Stretch"
+                      ItemsSource="{Binding Users}"
+                      IsReadOnly="True"
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{x:Static resx:UI.Username}"
+                                        Binding="{Binding Username}" />
+                    <DataGridTextColumn Header="{x:Static resx:UI.Name}"
+                                        Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="{x:Static resx:UI.EmailAddress}"
+                                        Binding="{Binding Email}" />
+                </DataGrid.Columns>
+
+            </DataGrid>
         </Grid>
     </ScrollViewer>
 </UserControl>

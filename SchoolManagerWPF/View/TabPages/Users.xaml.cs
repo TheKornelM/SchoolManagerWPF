@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SchoolManagerViewModel;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SchoolManagerWPF.View.TabPages;
 /// <summary>
@@ -22,5 +12,15 @@ public partial class Users : UserControl
     public Users()
     {
         InitializeComponent();
+
+        // Skip viewmodel initialization in designer mode (to avoid designer crash)
+        if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+        {
+            return;
+        }
+
+        var viewmodel = new FilterUsersViewModel();
+        DataContext = viewmodel;
+        Loaded += async (_, _) => await viewmodel.LoadAllUser();
     }
 }
