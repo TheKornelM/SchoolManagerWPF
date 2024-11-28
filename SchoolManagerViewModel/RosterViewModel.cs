@@ -4,7 +4,7 @@ using SchoolManagerModel.Managers;
 using SchoolManagerModel.Persistence;
 using System.Collections.ObjectModel;
 
-namespace SchoolManagerWPF.ViewModel;
+namespace SchoolManagerViewModel;
 
 public class RosterViewModel : ViewModelBase
 {
@@ -39,7 +39,7 @@ public class RosterViewModel : ViewModelBase
 
     #region Private fields
     private Class? _selectedClass;
-    private ObservableCollection<User> _currentClassRoster;
+    private ObservableCollection<User> _currentClassRoster = [];
     #endregion
 
     #region Constructor
@@ -53,7 +53,7 @@ public class RosterViewModel : ViewModelBase
     #region Private methods
     private async void GetClasses()
     {
-        var schoolDbContext = new SchoolDbContext();
+        using var schoolDbContext = new SchoolDbContext();
         var classDatabase = new ClassDatabase(schoolDbContext);
         var classManager = new ClassManager(classDatabase);
         Classes = new ObservableCollection<Class>(await classManager.GetClassesAsync());
@@ -61,10 +61,9 @@ public class RosterViewModel : ViewModelBase
 
     private async void GetClassRoster(Class cls)
     {
-        SchoolDbContext schoolDbContext = new SchoolDbContext();
-        ClassDatabase classDatabase = new ClassDatabase(schoolDbContext);
-        ClassManager classManager = new ClassManager(classDatabase);
-        //CurrentClassRoster.Clear();
+        using var schoolDbContext = new SchoolDbContext();
+        var classDatabase = new ClassDatabase(schoolDbContext);
+        var classManager = new ClassManager(classDatabase);
         CurrentClassRoster = new ObservableCollection<User>(await classManager.GetClassStudentsAsync(cls));
     }
     #endregion

@@ -1,5 +1,5 @@
 ﻿using SchoolManagerModel.Utils;
-using SchoolManagerWPF.ViewModel;
+using SchoolManagerViewModel;
 using System.ComponentModel;
 using System.Resources;
 using System.Windows;
@@ -26,9 +26,9 @@ namespace SchoolManagerWPF.View.TabPages
             ClassesGrid.DataContext = getNewClassesViewModel(resourceManager);
         }
 
-        private ClassesViewModel getNewClassesViewModel(ResourceManager resourceManager)
+        private AdminClassesViewModel getNewClassesViewModel(ResourceManager resourceManager)
         {
-            var classesViewModel = new ClassesViewModel(resourceManager);
+            var classesViewModel = new AdminClassesViewModel(resourceManager);
             classesViewModel.SuccessfulClassAdd = () =>
             {
                 MessageBox.Show(resourceManager.GetString("SuccessfullyAdded"));

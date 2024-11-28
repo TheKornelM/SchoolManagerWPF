@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows.Input;
 
-namespace SchoolManagerWPF.ViewModel.Commands;
+namespace SchoolManagerViewModel.Commands;
 
 public class ShowLoginCommand : ICommand
 
@@ -28,6 +28,7 @@ public class ShowLoginCommand : ICommand
 
         string lang = GetLanguageCode();
         Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+        Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
 
         if (_languageSelectViewModel.LoginShowAction != null)
         {

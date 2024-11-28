@@ -4,13 +4,12 @@ using System.Windows;
 using System.Windows.Controls;
 
 namespace SchoolManagerWPF.View.TabPages;
-
 /// <summary>
-/// Interaction logic for Roster.xaml
+/// Interaction logic for Users.xaml
 /// </summary>
-public partial class Roster : UserControl
+public partial class Users : UserControl
 {
-    public Roster()
+    public Users()
     {
         InitializeComponent();
 
@@ -20,6 +19,8 @@ public partial class Roster : UserControl
             return;
         }
 
-        RosterGrid.DataContext = new RosterViewModel();
+        var viewmodel = new FilterUsersViewModel();
+        DataContext = viewmodel;
+        Loaded += async (_, _) => await viewmodel.LoadAllUser();
     }
 }

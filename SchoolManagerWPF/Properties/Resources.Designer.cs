@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SchoolManagerWPF.Properties {
+namespace SchoolManagerViewModel.Properties {
     using System;
     
     

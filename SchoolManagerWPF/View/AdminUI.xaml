@@ -18,14 +18,24 @@
         <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
     </Window.Resources>
     <Grid>
-        <TabControl Background="#FFE5E5E5">
-            <TabItem Header="{x:Static resx:UI.Users}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*" />
+            <ColumnDefinition Width="13*" />
+        </Grid.ColumnDefinitions>
+        <TabControl Background="#FFE5E5E5"
+                    Grid.ColumnSpan="2">
+            <TabItem Header="{x:Static resx:UI.AddUser}">
                 <tabpages:AddUser x:Name="AddUser"></tabpages:AddUser>
+            </TabItem>
+            <TabItem Header="{x:Static resx:UI.Users}">
+                <tabpages:Users />
             </TabItem>
             <TabItem Header="{x:Static resx:UI.Classes}">
                 <tabpages:Classes />
             </TabItem>
-            <TabItem Header="{x:Static resx:UI.AddSubject}" />
+            <TabItem Header="{x:Static resx:UI.AddSubject}">
+                <tabpages:Subjects />
+            </TabItem>
             <TabItem Header="{x:Static resx:UI.Roster}">
                 <tabpages:Roster />
             </TabItem>

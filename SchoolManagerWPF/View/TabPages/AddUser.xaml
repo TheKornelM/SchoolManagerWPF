@@ -1,18 +1,20 @@
 ﻿<UserControl x:Class="SchoolManagerWPF.View.TabPages.AddUser"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SchoolManagerWPF.View.TabPages"
              xmlns:resx="clr-namespace:SchoolManagerModel.Resources;assembly=SchoolManagerModel"
              xmlns:controls="clr-namespace:SchoolManagerWPF.View.Controls"
              xmlns:converters="clr-namespace:SchoolManagerWPF.Converters"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"
+             d:DesignHeight="700"
+             d:DesignWidth="800">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <converters:RoleToIntConverter x:Key="RoleToIntConverter" />
         <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+        <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter" />
     </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid Margin="30,30,30,30"
@@ -38,39 +40,39 @@
                 </Grid.RowDefinitions>
                 <!-- Username Field -->
                 <controls:ValidatedField LabelContent="{x:Static resx:UI.Username}"
-                                         FieldValue="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                         ValidationError="{Binding UsernameValidatorErrors}"
+                                         FieldValue="{Binding User.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         ValidationError="{Binding User.UsernameValidatorErrors}"
                                          Grid.Row="0" />
 
                 <!-- First Name Field -->
                 <controls:ValidatedField LabelContent="{x:Static resx:UI.FirstName}"
-                                         FieldValue="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                         ValidationError="{Binding FirstNameValidatorErrors}"
+                                         FieldValue="{Binding User.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         ValidationError="{Binding User.FirstNameValidatorErrors}"
                                          Grid.Row="1" />
 
                 <!-- Last Name Field -->
                 <controls:ValidatedField LabelContent="{x:Static resx:UI.LastName}"
-                                         FieldValue="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                         ValidationError="{Binding LastNameValidatorErrors}"
+                                         FieldValue="{Binding User.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         ValidationError="{Binding User.LastNameValidatorErrors}"
                                          Grid.Row="2" />
 
                 <controls:ValidatedPasswordField LabelContent="{x:Static resx:UI.Password}"
-                                                 Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                 ValidationError="{Binding PasswordValidatorErrors}"
+                                                 Password="{Binding User.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 ValidationError="{Binding User.PasswordValidatorErrors}"
                                                  Grid.Row="3"
                                                  ResetPassword="{Binding ResetPassword}"
                                                  x:Name="PasswordField" />
 
                 <controls:ValidatedPasswordField LabelContent="{x:Static resx:UI.ConfirmPassword}"
-                                                 Password="{Binding ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                 ValidationError="{Binding ConfirmPasswordValidatorErrors}"
+                                                 Password="{Binding User.ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 ValidationError="{Binding User.ConfirmPasswordValidatorErrors}"
                                                  ResetPassword="{Binding ResetPassword}"
                                                  Grid.Row="4"
                                                  x:Name="ConfirmPasswordField" />
 
                 <controls:ValidatedField LabelContent="{x:Static resx:UI.EmailAddress}"
-                                         FieldValue="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                         ValidationError="{Binding EmailValidatorErrors}"
+                                         FieldValue="{Binding User.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         ValidationError="{Binding User.EmailValidatorErrors}"
                                          Grid.Row="5" />
 
                 <Label Grid.Row="6"
@@ -88,6 +90,7 @@
                         Height="50"
                         MinWidth="200"
                         Grid.Row="9"
+                        Padding="10"
                         Command="{Binding AddUserCommand}" />
             </Grid>
 
@@ -109,33 +112,46 @@
                           ItemsSource="{Binding Classes}"
                           SelectedItem="{Binding Class}"
                           DisplayMemberPath="Name" />
-                <Label Content="{x:Static resx:UI.AssignedSubjects}"
-                       Grid.Row="3" />
-                <controls:CheckBoxList Objects="{Binding Subjects, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                       Grid.Row="5"
-                                       AllSubjectsSelected="{Binding AllSubjectsSelected, Mode=TwoWay}" />
-                <Button Grid.Row="7"
-                        Command="{Binding SelectAllSubjectsCommand}"
-                        MinHeight="50px"
-                        Width="auto"
-                        MaxWidth="200px">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=AllSubjectsSelected}"
-                                             Value="True">
-                                    <Setter Property="Content"
-                                            Value="{x:Static resx:UI.UnselectAll}" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Path=AllSubjectsSelected}"
-                                             Value="False">
-                                    <Setter Property="Content"
-                                            Value="{x:Static resx:UI.SelectAll}" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
+                <Grid Grid.Row="3"
+                      Grid.RowSpan="3"
+                      Grid.Column="1"
+                      Visibility="{Binding Subjects.Count, Converter={StaticResource IntToVisibilityConverter}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="30px" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Label Content="{x:Static resx:UI.AssignedSubjects}"
+                           Grid.Row="0" />
+                    <controls:CheckBoxList Objects="{Binding Subjects, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                           Grid.Row="2"
+                                           AllSubjectsSelected="{Binding AllSubjectsSelected, Mode=TwoWay}" />
+                    <Button Grid.Row="5"
+                            Command="{Binding SelectAllSubjectsCommand}"
+                            MinHeight="50px"
+                            Width="auto"
+                            MaxWidth="200px">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=AllSubjectsSelected}"
+                                                 Value="True">
+                                        <Setter Property="Content"
+                                                Value="{x:Static resx:UI.UnselectAll}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=AllSubjectsSelected}"
+                                                 Value="False">
+                                        <Setter Property="Content"
+                                                Value="{x:Static resx:UI.SelectAll}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
             </Grid>
         </Grid>
     </ScrollViewer>

@@ -4,20 +4,20 @@ using System.Windows.Data;
 
 namespace SchoolManagerWPF.Converters;
 
-public class StringToVisibilityConverter : IValueConverter
+public class IntToVisibilityConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value is string str && !string.IsNullOrWhiteSpace(str))
+        if (value is int count)
         {
-            return Visibility.Visible;
+            return count > 0 ? Visibility.Visible : Visibility.Collapsed;
         }
+
         return Visibility.Collapsed;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        // ConvertBack is not implemented because it’s not needed for one-way binding
-        throw new NotSupportedException("StringToVisibilityConverter does not support ConvertBack.");
+        throw new NotSupportedException();
     }
 }

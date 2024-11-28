@@ -1,0 +1,159 @@
+﻿<UserControl x:Class="SchoolManagerWPF.View.TabPages.AddShowMarks"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SchoolManagerWPF.View.TabPages"
+             xmlns:resx="clr-namespace:SchoolManagerModel.Resources;assembly=SchoolManagerModel"
+             xmlns:converters="clr-namespace:SchoolManagerWPF.Converters"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <!-- Define reusable spacing resources -->
+        <Thickness x:Key="StandardMargin"
+                   Left="20"
+                   Top="20"
+                   Right="20"
+                   Bottom="20" />
+        <Style x:Key="RowSpacingStyle"
+               TargetType="RowDefinition">
+            <Setter Property="Height"
+                    Value="20" />
+        </Style>
+        <Style x:Key="AutoRowStyle"
+               TargetType="RowDefinition">
+            <Setter Property="Height"
+                    Value="Auto" />
+        </Style>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:CollectionCountToVisibilityConverter x:Key="CollectionCountToVisibilityConverter" />
+    </UserControl.Resources>
+
+    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                  VerticalScrollBarVisibility="Auto">
+        <Grid Margin="{StaticResource StandardMargin}"
+              Background="#FFE5E5E5">
+            <Grid.RowDefinitions>
+                <RowDefinition Style="{StaticResource AutoRowStyle}" />
+                <RowDefinition Style="{StaticResource RowSpacingStyle}" />
+                <RowDefinition Style="{StaticResource AutoRowStyle}" />
+                <RowDefinition Style="{StaticResource AutoRowStyle}" />
+                <RowDefinition Style="{StaticResource RowSpacingStyle}" />
+                <RowDefinition Style="{StaticResource AutoRowStyle}" />
+                <RowDefinition Style="{StaticResource AutoRowStyle}" />
+                <RowDefinition Style="{StaticResource RowSpacingStyle}" />
+                <RowDefinition Style="{StaticResource AutoRowStyle}" />
+                <RowDefinition Style="{StaticResource AutoRowStyle}" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"
+                                  MinWidth="250" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Content="{x:Static resx:UI.SubjectAndStudent}"
+                   FontWeight="Bold" />
+
+            <!-- Select Subject -->
+            <Label Content="{x:Static resx:UI.Subject}"
+                   Grid.Row="2" />
+            <ComboBox Grid.Row="3"
+                      ItemsSource="{Binding Subjects}"
+                      SelectedItem="{Binding Mark.Subject, Mode=TwoWay}"
+                      DisplayMemberPath="Name"
+                      IsSynchronizedWithCurrentItem="True" />
+
+            <!-- Select Student -->
+            <Label Content="{x:Static resx:UI.Student}"
+                   Grid.Row="5"
+                   Visibility="{Binding IsSubjectSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <ComboBox Grid.Row="6"
+                      ItemsSource="{Binding Students}"
+                      SelectedItem="{Binding Mark.Student, Mode=TwoWay}"
+                      DisplayMemberPath="User.Name"
+                      IsSynchronizedWithCurrentItem="True"
+                      Visibility="{Binding IsSubjectSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+            <!-- Add Mark -->
+            <Grid Grid.Column="2"
+                  Grid.RowSpan="7"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Visibility="{Binding IsStudentSelected, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Style="{StaticResource AutoRowStyle}" />
+                    <RowDefinition Style="{StaticResource RowSpacingStyle}" />
+                    <RowDefinition Style="{StaticResource AutoRowStyle}" />
+                    <RowDefinition Style="{StaticResource RowSpacingStyle}" />
+                    <RowDefinition Style="{StaticResource AutoRowStyle}" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label Content="{x:Static resx:UI.AddMark}"
+                       Grid.ColumnSpan="5"
+                       FontWeight="Bold" />
+                <Label Grid.Row="2"
+                       Content="{x:Static resx:UI.Mark}"
+                       ContentStringFormat="{}{0}:" />
+                <ComboBox Grid.Row="2"
+                          Grid.Column="1"
+                          ItemsSource="{Binding Grades}"
+                          SelectedItem="{Binding Mark.Grade, Mode=TwoWay}" />
+                <Label Content="{x:Static resx:UI.Notes}"
+                       Grid.Row="4"
+                       ContentStringFormat="{}{0}:" />
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              Name="scv"
+                              Grid.Row="5"
+                              Grid.ColumnSpan="3"
+                              HorizontalAlignment="Stretch">
+                    <TextBox TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             AcceptsReturn="True"
+                             Text="{Binding Mark.Notes, Mode=TwoWay}" />
+                </ScrollViewer>
+
+                <Button Grid.Row="5"
+                        Grid.Column="4"
+                        Width="Auto"
+                        Padding="10"
+                        Command="{Binding AddMarkCommand}">
+                    <TextBlock TextWrapping="Wrap"
+                               HorizontalAlignment="Center"
+                               Text="{x:Static resx:UI.AddMark}" />
+                </Button>
+            </Grid>
+            <Label Content="{x:Static resx:UI.CurrentMarks}"
+                   ContentStringFormat="{}{0}:"
+                   Grid.Row="8"
+                   FontWeight="Bold"
+                   Visibility="{Binding StudentSubjectMarks, Converter={StaticResource 
+                CollectionCountToVisibilityConverter}}" />
+            <DataGrid Grid.Row="9"
+                      Grid.ColumnSpan="3"
+                      VerticalAlignment="Stretch"
+                      ItemsSource="{Binding StudentSubjectMarks}"
+                      Visibility="{Binding StudentSubjectMarks, Converter={StaticResource CollectionCountToVisibilityConverter}}"
+                      IsReadOnly="True"
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{x:Static resx:UI.Mark}"
+                                        Binding="{Binding Grade}" />
+                    <DataGridTextColumn Header="{x:Static resx:UI.Date}"
+                                        Binding="{Binding Date}" />
+                    <DataGridTextColumn Header="{x:Static resx:UI.Notes}"
+                                        Binding="{Binding Notes}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

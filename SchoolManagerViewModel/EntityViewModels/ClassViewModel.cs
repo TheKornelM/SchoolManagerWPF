@@ -1,32 +1,11 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace SchoolManagerWPF.ViewModel.EntityViewModels;
-public class ClassViewModel : ViewModelBase, IDataErrorInfo
+namespace SchoolManagerViewModel.EntityViewModels;
+public class ClassViewModel : ViewModelBase
 {
     private int _id;
     private string _name = string.Empty;
     private bool _isChanged = false;
-
-    public string this[string columnName]
-    {
-        get
-        {
-            string error = string.Empty;
-
-            switch (columnName)
-            {
-                case nameof(Name):
-                    if (string.IsNullOrWhiteSpace(Name))
-                        error = "First name cannot be empty.";
-                    if (Name?.Length > 4)
-                        error = "The name must be less than 50 characters.";
-                    break;
-            }
-
-            return error;
-        }
-    }
 
     [Key]
     public int Id
@@ -79,5 +58,4 @@ public class ClassViewModel : ViewModelBase, IDataErrorInfo
         }
     }
 
-    public string Error { get; set; }
 }

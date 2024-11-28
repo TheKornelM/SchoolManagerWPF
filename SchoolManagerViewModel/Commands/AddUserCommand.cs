@@ -7,7 +7,7 @@ using SchoolManagerModel.Validators;
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace SchoolManagerWPF.ViewModel.Commands;
+namespace SchoolManagerViewModel.Commands;
 
 public class AddUserCommand : ICommand
 
@@ -96,13 +96,14 @@ public class AddUserCommand : ICommand
 
     private User CreateUserFromViewModel()
     {
+        var user = _addUserViewModel.User;
         return new User()
         {
-            Username = _addUserViewModel.Username,
-            FirstName = _addUserViewModel.FirstName,
-            LastName = _addUserViewModel.LastName,
-            Password = _addUserViewModel.Password,
-            Email = _addUserViewModel.Email,
+            Username = user.Username,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Password = user.Password,
+            Email = user.Email,
         };
     }
 }

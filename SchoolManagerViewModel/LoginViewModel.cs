@@ -1,8 +1,8 @@
-﻿using SchoolManagerModel.Entities.UserModel;
-using SchoolManagerWPF.ViewModel.Commands;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using SchoolManagerModel.Entities.UserModel;
+using SchoolManagerViewModel.Commands;
 
-namespace SchoolManagerWPF.ViewModel;
+namespace SchoolManagerViewModel;
 
 public class LoginViewModel : ViewModelBase
 {
