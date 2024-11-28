@@ -47,7 +47,7 @@
             </Grid.ColumnDefinitions>
 
             <!-- Filter users -->
-            <Label Content="Filter users"
+            <Label Content="{x:Static resx:UI.Filter}"
                    Grid.ColumnSpan="3"
                    FontWeight="Bold" />
             <Label Content="{x:Static resx:UI.Username}"
@@ -85,9 +85,10 @@
                      Grid.Column="4"
                      VerticalAlignment="Center" />
 
-            <Button Content="Reset filters"
+            <Button Content="{x:Static resx:UI.ResetFilters}"
                     Grid.Row="5"
                     Grid.ColumnSpan="5"
+                    Command="{Binding ResetUserFilterCommand}"
                     HorizontalAlignment="Left"
                     Padding="{StaticResource StandardPadding}" />
             <!-- Show users -->

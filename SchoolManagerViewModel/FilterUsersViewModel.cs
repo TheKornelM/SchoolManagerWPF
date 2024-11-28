@@ -1,6 +1,7 @@
 ﻿using SchoolManagerModel.DTOs;
 using SchoolManagerModel.Managers;
 using SchoolManagerModel.Persistence;
+using SchoolManagerViewModel.Commands;
 using System.Collections.ObjectModel;
 
 namespace SchoolManagerViewModel;
@@ -15,6 +16,8 @@ public class FilterUsersViewModel : ViewModelBase
     #endregion
 
     #region Public properties
+
+    public ResetUserFilterCommand ResetUserFilterCommand { get; private set; }
     public ObservableCollection<UserDto> Users
     {
         get => _users;
@@ -47,6 +50,21 @@ public class FilterUsersViewModel : ViewModelBase
 
     #endregion
 
+    public FilterUsersViewModel()
+    {
+        ResetUserFilterCommand = new(this);
+        PropertyChanged += async (_, e) =>
+        {
+            if (e.PropertyName == nameof(Users))
+            {
+                return;
+            }
+
+            ResetUserFilterCommand.NotifyCanExecuteChanged();
+            await LoadFilteredUsersAsync();
+        };
+    }
+
     public async Task LoadAllUser()
     {
         using var dbContext = new SchoolDbContext();
@@ -54,6 +72,16 @@ public class FilterUsersViewModel : ViewModelBase
         var userManager = new UserManager(userDatabase);
 
         var users = await userManager.GetUsersAsync();
+        SetField(ref _users, new ObservableCollection<UserDto>(users), nameof(Users));
+    }
+
+    private async Task LoadFilteredUsersAsync()
+    {
+        using var dbContext = new SchoolDbContext();
+        var userDatabase = new UserDatabase(dbContext);
+        var userManager = new UserManager(userDatabase);
+
+        var users = await userManager.FilterUsersAsync(UsernameFilter, FirstNameFilter, LastNameFilter, EmailFilter);
         SetField(ref _users, new ObservableCollection<UserDto>(users), nameof(Users));
     }
 }
