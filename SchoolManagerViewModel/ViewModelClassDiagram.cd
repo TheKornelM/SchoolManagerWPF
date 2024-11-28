@@ -199,7 +199,7 @@
     <Position X="21.5" Y="20.5" Width="4.25" />
     <AssociationLine Name="_classesViewModel" Type="SchoolManagerViewModel.AdminClassesViewModel">
       <MemberNameLabel ManuallyPlaced="true">
-        <Position X="0.11" Y="0.279" />
+        <Position X="0.11" Y="0.207" />
       </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
@@ -267,6 +267,32 @@
       <HashCode>CA0ABEAAACEAAAAIAQG4AQAAAAAAAiECAIIAAIAEKAk=</HashCode>
       <FileName>EntityViewModels\ValidatedUserViewModel.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="SchoolManagerViewModel.FilterUsersViewModel">
+    <Position X="26.25" Y="19.5" Width="4.25" />
+    <InheritanceLine Type="SchoolManagerViewModel.ViewModelBase" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="22.5" Y="10.497" />
+        <Point X="22.5" Y="10.863" />
+        <Point X="28.938" Y="10.863" />
+        <Point X="28.938" Y="19.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAQAGEAAgAAAAAAAQAACYAAAAAEAIAAAAAAAAAABAE=</HashCode>
+      <FileName>FilterUsersViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ResetUserFilterCommand" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SchoolManagerViewModel.Commands.ResetUserFilterCommand">
+    <Position X="21.75" Y="23" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAQCAEAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\ResetUserFilterCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

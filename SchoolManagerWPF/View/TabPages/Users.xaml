@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="SchoolManagerWPF.View.TabPages.Users"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SchoolManagerWPF.View.TabPages"
+             xmlns:converters="clr-namespace:SchoolManagerWPF.Converters"
+             xmlns:resx="clr-namespace:SchoolManagerModel.Resources;assembly=SchoolManagerModel"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:RoleToIntConverter x:Key="RoleToIntConverter" />
+        <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+        <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter" />
+
+        <!-- Shared Values -->
+        <sys:Double x:Key="TextBoxMaxWidth">400</sys:Double>
+        <Thickness x:Key="StandardMargin">30</Thickness>
+        <Thickness x:Key="StandardPadding">10</Thickness>
+    </UserControl.Resources>
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                  VerticalScrollBarVisibility="Auto">
+        <Grid Margin="{StaticResource StandardMargin}"
+              Background="#FFE5E5E5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="10px" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="10px" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="30px" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Filter users -->
+            <Label Content="{x:Static resx:UI.Filter}"
+                   Grid.ColumnSpan="5"
+                   FontWeight="Bold" />
+            <Label Content="{x:Static resx:UI.Username}"
+                   ContentStringFormat="{}{0}:"
+                   Grid.Row="1" />
+            <TextBox MaxWidth="{StaticResource TextBoxMaxWidth}"
+                     Text="{Binding UsernameFilter}"
+                     Grid.Row="1"
+                     Grid.Column="1"
+                     VerticalAlignment="Center" />
+            <Label Content="{x:Static resx:UI.EmailAddress}"
+                   ContentStringFormat="{}{0}:"
+                   Grid.Row="1"
+                   Grid.Column="3" />
+            <TextBox MaxWidth="{StaticResource TextBoxMaxWidth}"
+                     Text="{Binding EmailFilter}"
+                     Grid.Row="1"
+                     Grid.Column="4"
+                     VerticalAlignment="Center" />
+            <Label Content="{x:Static resx:UI.FirstName}"
+                   ContentStringFormat="{}{0}:"
+                   Grid.Row="3" />
+            <TextBox MaxWidth="{StaticResource TextBoxMaxWidth}"
+                     Text="{Binding FirstNameFilter}"
+                     Grid.Row="3"
+                     Grid.Column="1"
+                     VerticalAlignment="Center" />
+            <Label Content="{x:Static resx:UI.LastName}"
+                   ContentStringFormat="{}{0}:"
+                   Grid.Row="3"
+                   Grid.Column="3" />
+            <TextBox MaxWidth="{StaticResource TextBoxMaxWidth}"
+                     Text="{Binding LastNameFilter}"
+                     Grid.Row="3"
+                     Grid.Column="4"
+                     VerticalAlignment="Center" />
+
+            <Button Content="{x:Static resx:UI.ResetFilters}"
+                    Grid.Row="5"
+                    Grid.ColumnSpan="5"
+                    Command="{Binding ResetUserFilterCommand}"
+                    HorizontalAlignment="Left"
+                    Padding="{StaticResource StandardPadding}" />
+            
+            <!-- Show users -->
+            <Label Content="{x:Static resx:UI.Users}"
+                   Grid.Row="7"
+                   FontWeight="Bold" />
+            <DataGrid Grid.Row="8"
+                      Grid.ColumnSpan="5"
+                      VerticalAlignment="Stretch"
+                      ItemsSource="{Binding Users}"
+                      IsReadOnly="True"
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{x:Static resx:UI.Username}"
+                                        Binding="{Binding Username}" />
+                    <DataGridTextColumn Header="{x:Static resx:UI.Name}"
+                                        Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="{x:Static resx:UI.EmailAddress}"
+                                        Binding="{Binding Email}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
