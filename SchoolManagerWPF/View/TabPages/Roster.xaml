@@ -50,10 +50,8 @@
                       IsReadOnly="true"
                       AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="{x:Static resx:UI.FirstName}"
-                                        Binding="{Binding FirstName}" />
-                    <DataGridTextColumn Header="{x:Static resx:UI.LastName}"
-                                        Binding="{Binding LastName}" />
+                    <DataGridTextColumn Header="{x:Static resx:UI.Name}"
+                                        Binding="{Binding Name}" />
                     <DataGridTextColumn Header="{x:Static resx:UI.Username}"
                                         Binding="{Binding Username}" />
                     <DataGridTextColumn Header="{x:Static resx:UI.EmailAddress}"

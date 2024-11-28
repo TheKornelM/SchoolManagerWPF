@@ -119,14 +119,16 @@ public class AddUserViewModel : ViewModelBase
     #region Private Methods
     private async void GetClassesAsync()
     {
-        ClassDatabase db = new ClassDatabase(new SchoolDbContext());
+        using var dbContext = new SchoolDbContext();
+        var db = new ClassDatabase(dbContext);
         var classManager = new ClassManager(db);
         _classes = new ObservableCollection<Class>(await classManager.GetClassesAsync());
     }
 
     private async void GetClassSubjectsAsync(Class cls)
     {
-        ClassDatabase db = new ClassDatabase(new SchoolDbContext());
+        using var dbContext = new SchoolDbContext();
+        var db = new ClassDatabase(dbContext);
         var classManager = new ClassManager(db);
         var subjects = await classManager.GetClassSubjectsAsync(cls);
 

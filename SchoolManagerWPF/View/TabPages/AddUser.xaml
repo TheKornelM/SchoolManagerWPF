@@ -8,7 +8,7 @@
              xmlns:controls="clr-namespace:SchoolManagerWPF.View.Controls"
              xmlns:converters="clr-namespace:SchoolManagerWPF.Converters"
              mc:Ignorable="d"
-             d:DesignHeight="450"
+             d:DesignHeight="700"
              d:DesignWidth="800">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -90,6 +90,7 @@
                         Height="50"
                         MinWidth="200"
                         Grid.Row="9"
+                        Padding="10"
                         Command="{Binding AddUserCommand}" />
             </Grid>
 
@@ -120,6 +121,7 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
+                        <RowDefinition Height="30px" />
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
                     <Label Content="{x:Static resx:UI.AssignedSubjects}"
@@ -127,7 +129,7 @@
                     <controls:CheckBoxList Objects="{Binding Subjects, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                            Grid.Row="2"
                                            AllSubjectsSelected="{Binding AllSubjectsSelected, Mode=TwoWay}" />
-                    <Button Grid.Row="4"
+                    <Button Grid.Row="5"
                             Command="{Binding SelectAllSubjectsCommand}"
                             MinHeight="50px"
                             Width="auto"

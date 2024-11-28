@@ -51,7 +51,7 @@
                  Text="{Binding SubjectName}" />
         <Button Content="{x:Static resx:UI.AddSubject}"
                 Command="{Binding AddSubjectCommand}"
-                Grid.Row="9" />
+                Grid.Row="9" Padding="10" Width="auto"/>
 
     </Grid>
 </UserControl>
